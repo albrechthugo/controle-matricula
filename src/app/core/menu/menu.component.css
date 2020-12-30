@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  background-color: #000020;
+  background-color: #26231e;
 }
 
 .header-wrapper {
@@ -18,17 +18,20 @@
 }
 
 .header-wrapper h3 {
-  color: white;
-  font-weight: 800;
+  color: #ed9c2e;
+  font-weight: 700;
+}
+
+.header-wrapper h3 span {
+  color: #fff;
 }
 
 .header-wrapper ul a {
   text-decoration: none;
-  color: white;
-
-  transition: opacity 0.2s;
+  color: #fff;
+  transition: color 0.15s;
 }
 
 .header-wrapper ul a:hover {
-  opacity: 80%;
+  color: #ed9c2e;
 }
