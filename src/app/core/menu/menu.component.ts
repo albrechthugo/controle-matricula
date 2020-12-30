@@ -8,16 +8,9 @@ import { PoMenuItem } from '@po-ui/ng-components';
 })
 export class MenuComponent implements OnInit {
 
-  menuItems: PoMenuItem[] = [];
-  logoUrl: string;
-
   constructor() { }
 
   ngOnInit(): void {
-    this.logoUrl = '../../../assets/images/logo.png'
-    this.menuItems = [
-      {label: 'Abertura de Turmas', link: '/turmas'}
-    ]
   }
 
 }
