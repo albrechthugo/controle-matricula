@@ -1,0 +1,39 @@
+{
+  "alunos": [
+    { 
+      "id": 1,
+      "nome": "Hugo",
+      "email": "hugo@totvs.com",
+      "cpf": "11632997908",
+      "matricula": 123,
+      "formaIngresso": "ENADE",
+      "turma": []
+    }
+  ],
+  "professores": [
+    {
+      "id": 1,
+      "nome": "Josney",
+      "email": "josney@aulas.com",
+      "cpf": "05567832405",
+      "titulacao": "PHD",
+      "disciplinasMinistradas": []
+    }
+  ],
+  "disciplinas": [
+    {
+      "id": 1,
+      "descricao": "Matemática",
+      "sigla": "MAT",
+      "cargaHoraria": 5
+    }
+  ],
+  "turmas": [
+    {
+      "id": 1,
+      "anoLetivo": 2020,
+      "periodoLetivo": 2,
+      "numeroVagas": 35
+    }
+  ]
+}
