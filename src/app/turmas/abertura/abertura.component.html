@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <po-stepper #stepper>
+    <po-step p-label="Informações Básicas">
+      <app-informacoes-basicas (nextStep)="stepper.next()"></app-informacoes-basicas>
+    </po-step>
+
+    <po-step p-label="Disciplinas">
+      <app-disciplinas (nextStep)="stepper.next()"></app-disciplinas>
+    </po-step>
+
+    <po-step p-label="Alunos">
+      <app-alunos></app-alunos>
+    </po-step>
+  </po-stepper>
+</div>
