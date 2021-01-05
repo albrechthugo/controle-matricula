@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PoMenuItem } from '@po-ui/ng-components';
 
 @Component({
   selector: 'app-menu',

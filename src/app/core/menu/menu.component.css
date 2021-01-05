@@ -4,7 +4,9 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  background-color: #26231e;
+  background-color: var(--color-background);
+  box-shadow: 1px 1px 1.2px var(--color-background);
+  margin-bottom: 25px;
 }
 
 .header-wrapper {
@@ -18,20 +20,21 @@
 }
 
 .header-wrapper h3 {
-  color: #ed9c2e;
+  color: var(--color-primary);
   font-weight: 700;
 }
 
 .header-wrapper h3 span {
-  color: #fff;
+  font-weight: 100;
+  color: var(--color-white);
 }
 
 .header-wrapper ul a {
   text-decoration: none;
-  color: #fff;
+  color: var(--color-white);
   transition: color 0.15s;
 }
 
 .header-wrapper ul a:hover {
-  color: #ed9c2e;
+  color: var(--color-primary);
 }
