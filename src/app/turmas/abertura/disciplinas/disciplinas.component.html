@@ -1,0 +1,77 @@
+<div class="disciplinas-container">
+  <po-multiselect 
+    p-label="Selecione as disciplinas abaixo:" 
+    [p-options]="options"
+  >
+  </po-multiselect>
+
+  <po-modal #novaDisciplina p-title="Criar nova disciplina" p-size="auto">
+    <form class="form-group">
+      <div class="form-field">
+        <label>Sigla</label>
+        <input type="text" minlength="3" maxlength="4" placeholder="AGT">
+      </div>
+      
+      <div class="form-field">
+        <label>Descrição</label>
+        <input type="text" maxlength="100" placeholder="Algoritmos"> 
+      </div>
+
+      <div class="form-field">
+        <label>Carga Horária</label>
+        <input type="number" placeholder="Ex: 16 (horas)">
+      </div>
+
+      <div class="form-field">
+        <label>Professor</label>
+        <po-select [p-options]="professoresOptions"></po-select>
+      </div>
+
+      <po-button 
+        p-type="link"
+        p-label="Incluir novo professor"
+        (p-click)="novoProfessor.open()"
+      >
+      </po-button>
+
+      <po-modal #novoProfessor p-size="md" p-title="Novo Professor">
+        <form class="form-group">
+          <div class="form-field">
+            <label>Nome</label>
+            <input type="text" placeholder="Messias">
+          </div>
+          
+          <div class="form-field">
+            <label>E-mail</label>
+            <input type="text" placeholder="messias@jacó.com"> 
+          </div>
+    
+          <div class="form-field">
+            <label>CPF</label>
+            <input type="number" placeholder="777.777.777-77">
+          </div>
+    
+          <div class="form-field">
+            <label>Titulação</label>
+            <input type="text" placeholder="MESTRE, DOUTOR, PHD">
+          </div>
+        </form>
+      </po-modal>
+    </form>
+  </po-modal>
+
+  <po-button 
+    p-type="link" 
+    p-label="Criar nova disciplina"
+    (p-click)="novaDisciplina.open()"
+  >
+  </po-button>
+
+  <po-button 
+    p-label="Próximo" 
+    p-type="primary" 
+    class="btn-next"
+    (p-click)="next()"
+  >
+  </po-button>
+</div>
