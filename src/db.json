@@ -33,7 +33,8 @@
       "id": 1,
       "anoLetivo": 2020,
       "periodoLetivo": 2,
-      "numeroVagas": 35
+      "numeroVagas": 35,
+      "disciplinas": []
     }
   ]
 }
