@@ -25,7 +25,15 @@
       "id": 1,
       "descricao": "Matemática",
       "sigla": "MAT",
-      "cargaHoraria": 5
+      "cargaHoraria": 5,
+      "professor": {}
+    },
+    {
+      "id": 2,
+      "descricao": "Algoritmos",
+      "sigla": "AGT",
+      "cargaHoraria": 18,
+      "professor": {}
     }
   ],
   "turmas": [
