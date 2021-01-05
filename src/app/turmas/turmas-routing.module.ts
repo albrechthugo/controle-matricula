@@ -7,6 +7,10 @@ const turmasRoutes: Routes = [
   {
     path: '',
     component: LandingComponent
+  },
+  {
+    path: 'abertura',
+    loadChildren: () => import('./abertura/abertura.module').then(m => m.AberturaModule)
   }
 ];
 
