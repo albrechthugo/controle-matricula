@@ -1,49 +1,85 @@
 <div class="alunos-container">
-  <po-multiselect 
-    p-label="Selecione os alunos abaixo:" 
+  <po-multiselect
+    p-label="Selecione os alunos abaixo:"
     [p-options]="options"
   >
   </po-multiselect>
 
-  <po-modal #novoAluno p-title="Incluir novo aluno" p-size="sm">
-    <form class="form-group">
+  <po-modal
+    #novoAluno
+    p-title="Incluir novo aluno"
+    p-size="sm"
+  >
+    <form [formGroup]="form" class="form-group">
       <div class="form-field">
         <label>Nome</label>
-        <input type="text" minlength="3" placeholder="Keanu Reeves">
+        <input
+          [(ngModel)]="aluno.nome"
+          formControlName="nome"
+          type="text"
+          name="nome"
+          placeholder="Keanu Reeves"
+        >
       </div>
-      
+
       <div class="form-field">
         <label>Email</label>
-        <input type="text" maxlength="100" placeholder="keanureeves@legal.com">
+        <input
+          [(ngModel)]="aluno.email"
+          formControlName="email"
+          type="text"
+          name="email"
+          placeholder="keanureeves@legal.com"
+        >
       </div>
 
       <div class="form-field">
         <label>CPF</label>
-        <input type="text" placeholder="123.456.789-00">
+        <input
+          [(ngModel)]="aluno.cpf"
+          formControlName="cpf"
+          type="text"
+          name="cpf"
+          placeholder="123.456.789-00"
+        >
       </div>
 
       <div class="form-field">
         <label>Matrícula</label>
-        <input type="number" placeholder="Ex: 45892">
+        <input
+          [(ngModel)]="aluno.matricula"
+          formControlName="matricula"
+          type="number"
+          name="matricula"
+          placeholder="Ex: 45892"
+        >
       </div>
 
       <div class="form-field">
         <label>Forma de Ingresso</label>
-        <input type="text" placeholder="ENADE ou VESTIBULAR">
+        <input
+          [(ngModel)]="aluno.formaIngresso"
+          formControlName="formaIngresso"
+          type="text"
+          name="formaIngresso"
+          placeholder="ENADE ou VESTIBULAR"
+        >
       </div>
     </form>
+
+    <button (click)="criarAluno()">Adicionar</button>
   </po-modal>
 
-  <po-button 
-    p-type="link" 
+  <po-button
+    p-type="link"
     p-label="Incluir novo aluno"
     (p-click)="novoAluno.open()"
   >
   </po-button>
 
-  <po-button 
-    p-label="Concluir" 
-    p-type="primary" 
+  <po-button
+    p-label="Concluir"
+    p-type="primary"
     class="btn-finish"
   >
   </po-button>
