@@ -1,5 +1,5 @@
 export enum Titulacao {
-  MESTRE,
-  DOUTOR,
-  PHD
+  MESTRE = 'Mestre',
+  DOUTOR = 'Doutor',
+  PHD = 'PHD'
 }
