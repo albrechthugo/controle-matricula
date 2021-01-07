@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Disciplina } from '../../../../entities/disciplina/disciplina.interface';
+import { Disciplina } from 'src/app/entities/disciplina/disciplina.interface';
 
 @Injectable({
   providedIn: 'root'
