@@ -2,11 +2,12 @@
   <po-multiselect
     p-label="Selecione as disciplinas abaixo:"
     [p-options]="disciplinasOptions"
+    [(ngModel)]="disciplinas"
   >
   </po-multiselect>
 
   <po-modal #novaDisciplina p-title="Criar nova disciplina" p-size="sm">
-    <form class="form-group">
+    <form [formGroup]="disciplinaForm" class="form-group">
       <div class="form-field">
         <label>Sigla</label>
         <input
@@ -14,6 +15,7 @@
           placeholder="AGT"
           name="sigla"
           [(ngModel)]="disciplina.sigla"
+          formControlName="sigla"
         >
       </div>
 
@@ -24,6 +26,7 @@
           placeholder="Algoritmos"
           name="descricao"
           [(ngModel)]="disciplina.descricao"
+          formControlName="descricao"
         >
       </div>
 
@@ -34,12 +37,19 @@
           placeholder="Ex: 16 (horas)"
           name="cargaHoraria"
           [(ngModel)]="disciplina.cargaHoraria"
+          formControlName="cargaHoraria"
         >
       </div>
 
       <div class="form-field">
         <label>Professor</label>
-        <po-select [p-options]="professoresOptions"></po-select>
+        <po-select
+          name="professor"
+          [(ngModel)]="disciplina.professor"
+          [p-options]="professoresOptions"
+          formControlName="professor"
+        >
+        </po-select>
       </div>
 
       <po-button
@@ -50,14 +60,16 @@
       </po-button>
 
       <po-modal #novoProfessor p-size="md" p-title="Novo Professor">
-        <form class="form-group">
+        <form  [formGroup]="professorForm" class="form-group">
           <div class="form-field">
             <label>Nome</label>
             <input
               type="text"
               placeholder="Messias"
               name="nome"
-              [(ngModel)]="professor.nome">
+              [(ngModel)]="professor.nome"
+              formControlName="nome"
+            >
           </div>
 
           <div class="form-field">
@@ -66,7 +78,9 @@
               type="text"
               placeholder="messias@jacó.com"
               name="email"
-              [(ngModel)]="professor.email">
+              [(ngModel)]="professor.email"
+              formControlName="email"
+            >
           </div>
 
           <div class="form-field">
@@ -74,22 +88,28 @@
             <input
               type="number"
               placeholder="777.777.777-77"
-              name="cpf" [(ngModel)]="professor.cpf">
+              name="cpf"
+              [(ngModel)]="professor.cpf"
+              formControlName="cpf"
+            >
           </div>
 
           <div class="form-field">
             <label>Titulação</label>
-            <input
-              type="text"
-              placeholder="MESTRE, DOUTOR, PHD"
-              name="titulacao" [(ngModel)]="professor.titulacao">
+            <po-select
+              name="titulacao"
+              [(ngModel)]="professor.titulacao"
+              [p-options]="titulacaoProfessorOptions"
+              formControlName="titulacao"
+            >
+            </po-select>
           </div>
         </form>
 
-        <button (click)="criarProfessor()">Adicionar professor</button>
+        <button class="btn-create" (click)="criarProfessor()">Adicionar professor</button>
       </po-modal>
 
-      <button (click)="criarDisciplina()">Adicionar disciplina</button>
+      <button class="btn-create" (click)="criarDisciplina()">Adicionar disciplina</button>
     </form>
   </po-modal>
 
