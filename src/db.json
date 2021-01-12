@@ -1,48 +1,46 @@
 {
-  "alunos": [
-    { 
-      "id": 1,
-      "nome": "Hugo",
-      "email": "hugo@totvs.com",
-      "cpf": "12345678900",
-      "matricula": 123,
-      "formaIngresso": "ENADE",
-      "turma": []
+  "turmas": [
+    {
+      "descricao": "Calouros 2022",
+      "anoLetivo": 2022,
+      "periodoLetivo": 1,
+      "numeroVagas": 35,
+      "alunos": [
+        1
+      ],
+      "disciplinas": [
+        1
+      ],
+      "id": 1
     }
   ],
-  "professores": [
+  "alunos": [
     {
-      "id": 1,
-      "nome": "Josney",
-      "email": "josney@aulas.com",
-      "cpf": "05567832405",
-      "titulacao": "PHD",
-      "disciplinasMinistradas": []
+      "cpf": "12345678900",
+      "email": "hugobacana@lacoste.com.br",
+      "nome": "Hugo Albrecht",
+      "formaIngresso": "Vestibular",
+      "matricula": 458120,
+      "id": 1
     }
   ],
   "disciplinas": [
     {
-      "id": 1,
-      "descricao": "Matemática",
-      "sigla": "MAT",
-      "cargaHoraria": 5,
-      "professor": {}
-    },
-    {
-      "id": 2,
-      "descricao": "Algoritmos",
       "sigla": "AGT",
-      "cargaHoraria": 18,
-      "professor": {}
+      "cargaHoraria": 16,
+      "descricao": "Algoritmos",
+      "professor": 1,
+      "id": 1
     }
   ],
-  "turmas": [
+  "professores": [
     {
-      "id": 1,
-      "anoLetivo": 2020,
-      "periodoLetivo": 2,
-      "numeroVagas": 35,
-      "disciplinas": []
+      "nome": "Messias",
+      "email": "messias@jaco.com",
+      "cpf": 12345678900,
+      "titulacao": "Mestre",
+      "disciplinasMinistradas": null,
+      "id": 1
     }
   ]
 }
