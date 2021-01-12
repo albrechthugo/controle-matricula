@@ -1,4 +1,4 @@
 export enum FormaDeIngresso {
-  ENADE,
-  VESTIBULAR
+  ENADE = 'ENADE',
+  VESTIBULAR = 'Vestibular'
 }
