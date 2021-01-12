@@ -14,13 +14,14 @@ import { InformacoesBasicasComponent } from './informacoes-basicas/informacoes-b
 import { DisciplinasComponent } from './disciplinas/disciplinas.component';
 import { AlunosComponent } from './alunos/alunos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ValidationMessageModule } from 'src/app/shared/components/validation-message/validation-message.module';
 
 @NgModule({
   declarations: [
     AberturaComponent,
     InformacoesBasicasComponent,
     DisciplinasComponent,
-    AlunosComponent
+    AlunosComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PoModalModule,
     FormsModule,
     ReactiveFormsModule,
+    ValidationMessageModule
   ]
 })
 export class AberturaModule { }
