@@ -6,9 +6,10 @@ import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 import { FormaDeIngresso } from '../../../entities/aluno/forma-ingresso/ingresso.enum';
 import { AlunosCriarService } from './services/alunos-criar.service';
-import { AlunosGetAllService } from './services/alunos-get-all.service';
 import { novaTurma } from 'src/app/shared/mocks/turma-mock';
 import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { AlunosGetAllService } from './services/alunos-get-all.service';
 
 @Component({
   selector: 'app-alunos',
@@ -44,41 +45,37 @@ export class AlunosComponent implements OnInit {
 
   constructor(
     private criarAlunoService: AlunosCriarService,
-    private getAllAlunoService: AlunosGetAllService,
     private criarTurmaService: TurmaCriarService,
-    private fb: FormBuilder
+    private alunosGetAllService: AlunosGetAllService,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) {}
 
 
   ngOnInit(): void {
-    this.getAllAlunoService.getAllAlunos()
-      .subscribe(alunos => {
-        this.alunos = alunos;
-        this.alunos.map(aluno => {
-          this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
-        })
-      })
+    this.alunos = this.activatedRoute.snapshot.data['alunos'];
+    this.alunos.map(aluno => {
+      this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
+    });
+
+    this.alunoForm = this.fb.group({
+      cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]],
+      email: [null, [Validators.required, Validators.email]],
+      nome: [null, [Validators.required]],
+      formaIngresso: [null, [Validators.required]],
+      matricula: [null, [Validators.required, Validators.pattern(/[0-9]{6}/)]],
+    });
   }
 
   criarAluno(): void {
     this.criarAlunoService.criarAluno(this.aluno)
-      .pipe(switchMap(() => this.getAllAlunoService.getAllAlunos()))
+      .pipe(switchMap(() => this.alunosGetAllService.getAllAlunos()))
       .subscribe(alunos => {
         alunos.map(aluno => {
           this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
         })
       });
   }
-
-  // validateAlunoForm(): void {
-  //   this.alunoForm = this.fb.group({
-  //     cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]],
-  //     email: [null, [Validators.required, Validators.email]],
-  //     nome: [null, [Validators.required]],
-  //     formaIngresso: [null, [Validators.required]],
-  //     matricula: [null, [Validators.required, Validators.pattern(/[0-9]{6}/)]],
-  //   })
-  // }
 
   criarTurma(): void {
     this.criarTurmaService.abrirTurma(novaTurma)

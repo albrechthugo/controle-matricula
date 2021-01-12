@@ -1,16 +1,17 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { Disciplina } from 'src/app/entities/disciplina/disciplina.interface';
 import { Professor } from '../../../entities/professor/professor.interface';
 import { Titulacao } from '../../../entities/professor/titulacao/titulacao.enum';
-import {DisciplinaGetAllService} from './services/disciplina-get-all.service';
-import {ProfessoresCriarService} from '../../../services/professores/professores-criar.service';
-import {DisciplinasCriarService} from './services/disciplinas-criar.service';
-import {ProfessoresGetAllService} from '../../../services/professores/professores-get-all.service';
+import { ProfessoresCriarService } from '../../../services/professores/professores-criar.service';
+import { DisciplinasCriarService } from './services/disciplinas-criar.service';
 import { novaTurma } from 'src/app/shared/mocks/turma-mock';
+import { ActivatedRoute } from '@angular/router';
+import { DisciplinaGetAllService } from './services/disciplina-get-all.service';
+import { ProfessoresGetAllService } from 'src/app/services/professores/professores-get-all.service';
 
 @Component({
   selector: 'app-disciplinas',
@@ -67,33 +68,28 @@ export class DisciplinasComponent implements OnInit {
 
   constructor(
     private criarDisciplinaService: DisciplinasCriarService,
-    private getAllDisciplinaService: DisciplinaGetAllService,
     private criarProfessorService: ProfessoresCriarService,
-    private getAllProfessorService: ProfessoresGetAllService,
+    private disciplinaGetAllService: DisciplinaGetAllService,
+    private professoresGetAllService: ProfessoresGetAllService,
+    private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.getAllDisciplinaService.getAllDisciplinas()
-      .subscribe(disciplinas => {
-        this.disciplinas = disciplinas;
-        this.disciplinas.map(disciplina => {
-          this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
-        })
-      });
+    this.disciplinas = this.activatedRoute.snapshot.data['disciplinas'];
+    this.disciplinas.map(disciplina => {
+      this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
+    });
 
-    this.getAllProfessorService.getAllProfessores()
-      .subscribe(professores => {
-        this.professores = professores;
-        this.professores.map(professor => {
-          this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
-        })
-      });
+    this.professores = this.activatedRoute.snapshot.data['professores'];
+    this.professores.map(professor => {
+      this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
+    })
   }
 
   criarDisciplina(): void {
     this.criarDisciplinaService.criarDisciplina(this.disciplina)
-      .pipe(switchMap(() => this.getAllDisciplinaService.getAllDisciplinas()))
+      .pipe(switchMap(() => this.disciplinaGetAllService.getAllDisciplinas()))
       .subscribe(disciplinas => {
         disciplinas.map(disciplina =>{
           this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
@@ -103,7 +99,7 @@ export class DisciplinasComponent implements OnInit {
 
   criarProfessor(): void {
     this.criarProfessorService.criarProfessor(this.professor)
-      .pipe(switchMap(() => this.getAllProfessorService.getAllProfessores()))
+      .pipe(switchMap(() => this.professoresGetAllService.getAllProfessores()))
       .subscribe(professores => {
         professores.map(professor => {
           this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
