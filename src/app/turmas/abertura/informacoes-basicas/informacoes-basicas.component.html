@@ -1,25 +1,54 @@
 <div class="informacoes-container">
-  <form class="form-group">
+  <form [formGroup]="form" class="form-group">
     <div class="form-field">
       <label>Descrição</label>
-      <input type="text" maxlength="100" placeholder="Calouros 2021/1 ADS">
+      <input
+        name="descricao"
+        type="text"
+        placeholder="Calouros 2021/1 ADS"
+        [(ngModel)]="informacoesBasicas.descricao"
+        formControlName="descricao"
+      >
     </div>
-    
+
     <div class="form-field">
       <label>Ano Letivo</label>
-      <input type="number" placeholder="2021">
+      <input
+        name="anoLetivo"
+        type="number"
+        placeholder="2021"
+        [(ngModel)]="informacoesBasicas.anoLetivo"
+        formControlName="anoLetivo"
+      >
     </div>
 
     <div class="form-field">
       <label>Período Letivo</label>
-      <input type="number" placeholder="1º (semestre)">
+      <input
+        name="periodoLetivo"
+        type="number"
+        placeholder="1 ou 2 (semestre)"
+        [(ngModel)]="informacoesBasicas.periodoLetivo"
+        formControlName="periodoLetivo"
+      >
     </div>
 
     <div class="form-field">
       <label>Vagas</label>
-      <input type="number" placeholder="Ex: 32">
+      <input
+        name="numeroVagas"
+        type="number"
+        placeholder="Ex: 32"
+        [(ngModel)]="informacoesBasicas.numeroVagas"
+        formControlName="numeroVagas"
+      >
     </div>
   </form>
 
-  <po-button p-label="Próximo" p-type="primary" (p-click)="next()"></po-button>
+  <po-button
+    p-label="Próximo"
+    p-type="primary"
+    (p-click)="next()"
+  >
+  </po-button>
 </div>
