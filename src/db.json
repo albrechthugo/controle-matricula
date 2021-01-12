@@ -17,7 +17,7 @@
   "alunos": [
     {
       "cpf": "12345678900",
-      "email": "hugobacana@lacoste.com.br",
+      "email": "hugobacana@teste.com.br",
       "nome": "Hugo Albrecht",
       "formaIngresso": "Vestibular",
       "matricula": 458120,
