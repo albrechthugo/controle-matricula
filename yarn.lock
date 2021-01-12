@@ -1160,6 +1160,15 @@
   dependencies:
     mkdirp "^1.0.4"
 
+"@po-ui/ng-components@3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@po-ui/ng-components/-/ng-components-3.14.0.tgz#b1abde82fa727e62429de93dea7af92244945639"
+  integrity sha512-l6dX9cINC62mcH1+Kf+nHPO5FIZHvsqwQ2rivjRy5NAOLbDhkchqJWSJjIA+a4KgnA1VLaaTumPC4yf0eSf9cA==
+  dependencies:
+    "@po-ui/ng-schematics" "3.14.0"
+    "@po-ui/style" "3.14.0"
+    tslib "^2.0.0"
+
 "@po-ui/ng-components@^4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@po-ui/ng-components/-/ng-components-4.2.0.tgz#d384a39a1aaadfe863532842d9a47f2e0e957b0f"
@@ -1169,10 +1178,29 @@
     "@po-ui/style" "4.2.0"
     tslib "^2.0.0"
 
+"@po-ui/ng-schematics@3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@po-ui/ng-schematics/-/ng-schematics-3.14.0.tgz#7e795a3ae3267355a7c42d247a45343a56522b54"
+  integrity sha512-R5MxBKKRjpeZfD4CT1t4NlDPOmUlluMoC2Umj4aR7SKiZAlKAJ8Qc/RaJRL1LdQZOjM+7F3paIbWrMttQkvgug==
+
 "@po-ui/ng-schematics@4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@po-ui/ng-schematics/-/ng-schematics-4.2.0.tgz#dd979d8edd53efddafde91d1458719bb13a6a00f"
   integrity sha512-SYsiGxZfqvSmanFviB9StTzXpCeL8/5EyFFTuxE//0SXEc9dyIemP83rQKGXG8IITAmoQY1tJ1mRobbF8RjL8A==
+
+"@po-ui/ng-templates@^3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@po-ui/ng-templates/-/ng-templates-3.14.0.tgz#32ddb77249155264d36a969990d27173b822325b"
+  integrity sha512-ygN0c2+k0eaBzIH+JPpezjOBT6HDJx+oU+ix5ts5JgOeXW91qH0bkKcmjFScHUxT4npqg1aQEhI2C4U2jmYOeg==
+  dependencies:
+    "@po-ui/ng-components" "3.14.0"
+    "@po-ui/ng-schematics" "3.14.0"
+    tslib "^2.0.0"
+
+"@po-ui/style@3.14.0", "@po-ui/style@^3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@po-ui/style/-/style-3.14.0.tgz#1e6b60018c9437836f368e93b89ecb7bdfee87e9"
+  integrity sha512-MefKUGelSSeaV/4hmt3SVi8AroB+zwIjdyIC1+iZNqHQRAH7b8Ry6YLlBIkRFcDL3u3byi7qK6+smWio/vPQQw==
 
 "@po-ui/style@4.2.0":
   version "4.2.0"
@@ -1213,6 +1241,11 @@
   integrity sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
   dependencies:
     defer-to-connect "^1.0.1"
+
+"@totvs/po-theme@3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@totvs/po-theme/-/po-theme-3.14.0.tgz#64083329af5bb14183a33ba082a32560e683630a"
+  integrity sha512-H0xGkHvkGM0qyNPt0KJ0SmBPNhrk+6Ql/Z6cAzV7B/jIkyJOdOl02YBRnuPZS7tkvz4sMsP2UAotylxYOUciMg==
 
 "@types/glob@^7.1.1":
   version "7.1.3"
