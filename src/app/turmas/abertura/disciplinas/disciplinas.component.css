@@ -35,3 +35,12 @@
 .btn-next {
   margin-top: 30px;
 }
+
+.btn-create {
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  cursor: pointer;
+}
