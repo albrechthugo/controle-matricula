@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {PoMultiselectOption} from '@po-ui/ng-components';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
 
-import {Aluno} from 'src/app/entities/aluno/aluno.interface';
+import { Aluno } from 'src/app/entities/aluno/aluno.interface';
+import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
+import { FormaDeIngresso } from '../../../entities/aluno/forma-ingresso/ingresso.enum';
 import { AlunosCriarService } from './services/alunos-criar.service';
 import { AlunosGetAllService } from './services/alunos-get-all.service';
+import { novaTurma } from 'src/app/shared/mocks/turma-mock';
 
 @Component({
   selector: 'app-alunos',
@@ -13,44 +16,74 @@ import { AlunosGetAllService } from './services/alunos-get-all.service';
 })
 export class AlunosComponent implements OnInit {
 
-  options: PoMultiselectOption[] = [];
-
-  form = this.fb.group({
-    cpf: null,
-    email: null,
-    nome: null,
-    formaIngresso: null,
-    matricula: null
-  })
+  formaIngressoOptions: PoSelectOption[] = [
+    { label: 'ENADE', value: FormaDeIngresso.ENADE },
+    { label: 'VESTIBULAR', value: FormaDeIngresso.VESTIBULAR }
+  ];
 
   alunos: Aluno[] = [];
+
+  alunosOptions: PoMultiselectOption[] = [];
 
   aluno: Aluno = {
     cpf: null,
     email: null,
     nome: null,
     formaIngresso: null,
-    matricula: null
+    matricula: null,
   }
 
+  alunoForm = new FormGroup({
+    cpf: new FormControl(),
+    email: new FormControl(),
+    nome: new FormControl(),
+    formaIngresso: new FormControl(),
+    matricula: new FormControl(),
+  })
+
   constructor(
-    private alunosGetAllService: AlunosGetAllService,
-    private alunosCriarService: AlunosCriarService,
+    private criarAlunoService: AlunosCriarService,
+    private getAllAlunoService: AlunosGetAllService,
+    private criarTurmaService: TurmaCriarService,
     private fb: FormBuilder
-    ) {}
+  ) {}
 
 
   ngOnInit(): void {
-    this.alunosGetAllService.getAllAlunos().subscribe(alunos => {
-      this.alunos = alunos;
-      this.alunos.map(aluno => {
-        this.options = [...this.options, { label: aluno.nome, value: aluno.id }];
-      });
-    });
+    this.getAllAlunoService.getAllAlunos()
+      .subscribe(alunos => {
+        this.alunos = alunos;
+        this.alunos.map(aluno => {
+          this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
+        })
+      })
   }
 
   criarAluno(): void {
-    this.alunosCriarService.criarAluno(this.aluno)
+    this.criarAlunoService.criarAluno(this.aluno)
       .subscribe(() => console.log('Aluno criado com sucesso!'));
   }
+
+  // validateAlunoForm(): void {
+  //   this.alunoForm = this.fb.group({
+  //     cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]],
+  //     email: [null, [Validators.required, Validators.email]],
+  //     nome: [null, [Validators.required]],
+  //     formaIngresso: [null, [Validators.required]],
+  //     matricula: [null, [Validators.required, Validators.pattern(/[0-9]{6}/)]],
+  //   })
+  // }
+
+  criarTurma(): void {
+    this.criarTurmaService.abrirTurma(novaTurma)
+      .subscribe(() => {
+        console.log('Turma criada com sucesso!');
+      })
+  }
+
+  saveInfo(): void {
+    novaTurma.alunos = this.alunos;
+    this.criarTurma();
+  }
+
 }

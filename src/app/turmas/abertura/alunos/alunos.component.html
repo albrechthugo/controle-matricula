@@ -1,7 +1,8 @@
 <div class="alunos-container">
   <po-multiselect
     p-label="Selecione os alunos abaixo:"
-    [p-options]="options"
+    [p-options]="alunosOptions"
+    [(ngModel)]="alunos"
   >
   </po-multiselect>
 
@@ -10,15 +11,15 @@
     p-title="Incluir novo aluno"
     p-size="sm"
   >
-    <form [formGroup]="form" class="form-group">
+    <form [formGroup]="alunoForm" class="form-group">
       <div class="form-field">
         <label>Nome</label>
         <input
           [(ngModel)]="aluno.nome"
-          formControlName="nome"
           type="text"
           name="nome"
           placeholder="Keanu Reeves"
+          formControlName="nome"
         >
       </div>
 
@@ -26,10 +27,10 @@
         <label>Email</label>
         <input
           [(ngModel)]="aluno.email"
-          formControlName="email"
           type="text"
           name="email"
           placeholder="keanureeves@legal.com"
+          formControlName="email"
         >
       </div>
 
@@ -37,10 +38,10 @@
         <label>CPF</label>
         <input
           [(ngModel)]="aluno.cpf"
-          formControlName="cpf"
           type="text"
           name="cpf"
           placeholder="123.456.789-00"
+          formControlName="cpf"
         >
       </div>
 
@@ -48,26 +49,26 @@
         <label>Matrícula</label>
         <input
           [(ngModel)]="aluno.matricula"
-          formControlName="matricula"
           type="number"
           name="matricula"
           placeholder="Ex: 45892"
+          formControlName="matricula"
         >
       </div>
 
       <div class="form-field">
         <label>Forma de Ingresso</label>
-        <input
-          [(ngModel)]="aluno.formaIngresso"
-          formControlName="formaIngresso"
-          type="text"
+        <po-select
           name="formaIngresso"
-          placeholder="ENADE ou VESTIBULAR"
+          [(ngModel)]="aluno.formaIngresso"
+          [p-options]="formaIngressoOptions"
+          formControlName="formaIngresso"
         >
+        </po-select>
       </div>
     </form>
 
-    <button (click)="criarAluno()">Adicionar</button>
+    <button class="btn-create" (click)="criarAluno()">Adicionar</button>
   </po-modal>
 
   <po-button
@@ -81,6 +82,7 @@
     p-label="Concluir"
     p-type="primary"
     class="btn-finish"
+    (p-click)="saveInfo()"
   >
   </po-button>
 </div>
