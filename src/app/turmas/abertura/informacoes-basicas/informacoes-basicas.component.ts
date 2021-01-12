@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Turma } from '../../../entities/turma/turma.interface';
 import { novaTurma } from '../../../shared/mocks/turma-mock';
@@ -31,6 +31,12 @@ export class InformacoesBasicasComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+   this.form = this.fb.group({
+      descricao: [null, [Validators.maxLength(30), Validators.required]],
+      anoLetivo: [null, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
+      periodoLetivo: [null, [Validators.required, Validators.maxLength(1),Validators.pattern(/[1-2]{1}/)]],
+      numeroVagas: [null, [Validators.required]]
+    });
   }
 
   saveInfo(): void {
@@ -40,16 +46,7 @@ export class InformacoesBasicasComponent implements OnInit {
     novaTurma.numeroVagas = this.informacoesBasicas.numeroVagas;
   }
 
-  // validateForm(): void {
-  //   this.form = this.fb.group({
-  //     descricao: [null, [Validators.maxLength(40), Validators.required]],
-  //     anoLetivo: [null, [Validators.maxLength(4), Validators.required]],
-  //     periodoLetivo: [null, [Validators.maxLength(1), Validators.required]],
-  //     numeroVagas: [null, [Validators.maxLength(2), Validators.required]]
-  //   })
-  // }
-
-  next() {
+  next(): void {
     this.saveInfo();
     this.nextStep.emit();
   }

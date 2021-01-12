@@ -1,5 +1,5 @@
 <div class="informacoes-container">
-  <form [formGroup]="form" class="form-group">
+  <form #alunoForm [formGroup]="form" class="form-group">
     <div class="form-field">
       <label>Descrição</label>
       <input
@@ -9,6 +9,16 @@
         [(ngModel)]="informacoesBasicas.descricao"
         formControlName="descricao"
       >
+
+      <app-validation-message 
+        *ngIf="form.get('descricao').errors?.required" 
+        textContent="Campo obrigatório">
+      </app-validation-message>
+
+      <app-validation-message 
+        *ngIf="form.get('descricao').errors?.maxlength" 
+        textContent="Limite máximo de 30 caracteres">
+      </app-validation-message>
     </div>
 
     <div class="form-field">
@@ -20,6 +30,16 @@
         [(ngModel)]="informacoesBasicas.anoLetivo"
         formControlName="anoLetivo"
       >
+
+      <app-validation-message 
+        *ngIf="form.get('anoLetivo').errors?.required" 
+        textContent="Campo obrigatório">
+      </app-validation-message>
+
+      <app-validation-message 
+        *ngIf="form.get('anoLetivo').errors?.pattern" 
+        textContent="Ex: 2020">
+      </app-validation-message>
     </div>
 
     <div class="form-field">
@@ -31,6 +51,16 @@
         [(ngModel)]="informacoesBasicas.periodoLetivo"
         formControlName="periodoLetivo"
       >
+
+      <app-validation-message 
+        *ngIf="form.get('periodoLetivo').errors?.required" 
+        textContent="Campo obrigatório">
+      </app-validation-message>
+
+      <app-validation-message 
+        *ngIf="form.get('periodoLetivo').errors?.pattern" 
+        textContent="1° ou 2° semestre">
+      </app-validation-message>
     </div>
 
     <div class="form-field">
@@ -42,13 +72,28 @@
         [(ngModel)]="informacoesBasicas.numeroVagas"
         formControlName="numeroVagas"
       >
+
+      <app-validation-message 
+        *ngIf="form.get('numeroVagas').errors?.required" 
+        textContent="Campo obrigatório">
+      </app-validation-message>
     </div>
   </form>
 
-  <po-button
+  <po-button 
+    *ngIf="form.valid; else disabledButton"
     p-label="Próximo"
     p-type="primary"
     (p-click)="next()"
   >
   </po-button>
+
+  <ng-template #disabledButton>
+    <po-button
+    p-label="Próximo"
+    p-type="primary"
+    p-disabled
+    >
+  </po-button>
+  </ng-template>
 </div>
