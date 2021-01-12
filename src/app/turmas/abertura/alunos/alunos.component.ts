@@ -8,6 +8,7 @@ import { FormaDeIngresso } from '../../../entities/aluno/forma-ingresso/ingresso
 import { AlunosCriarService } from './services/alunos-criar.service';
 import { AlunosGetAllService } from './services/alunos-get-all.service';
 import { novaTurma } from 'src/app/shared/mocks/turma-mock';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alunos',
@@ -61,7 +62,12 @@ export class AlunosComponent implements OnInit {
 
   criarAluno(): void {
     this.criarAlunoService.criarAluno(this.aluno)
-      .subscribe(() => console.log('Aluno criado com sucesso!'));
+      .pipe(switchMap(() => this.getAllAlunoService.getAllAlunos()))
+      .subscribe(alunos => {
+        alunos.map(aluno => {
+          this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
+        })
+      });
   }
 
   // validateAlunoForm(): void {

@@ -1,15 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { Disciplina } from 'src/app/entities/disciplina/disciplina.interface';
-
 import { Professor } from '../../../entities/professor/professor.interface';
 import { Titulacao } from '../../../entities/professor/titulacao/titulacao.enum';
 import {DisciplinaGetAllService} from './services/disciplina-get-all.service';
 import {ProfessoresCriarService} from '../../../services/professores/professores-criar.service';
 import {DisciplinasCriarService} from './services/disciplinas-criar.service';
 import {ProfessoresGetAllService} from '../../../services/professores/professores-get-all.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { novaTurma } from 'src/app/shared/mocks/turma-mock';
 
 @Component({
@@ -93,16 +93,22 @@ export class DisciplinasComponent implements OnInit {
 
   criarDisciplina(): void {
     this.criarDisciplinaService.criarDisciplina(this.disciplina)
-      .subscribe(() => console.log('Disciplina criada com sucesso!'));
+      .pipe(switchMap(() => this.getAllDisciplinaService.getAllDisciplinas()))
+      .subscribe(disciplinas => {
+        disciplinas.map(disciplina =>{
+          this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
+        })
+      });
   }
 
   criarProfessor(): void {
     this.criarProfessorService.criarProfessor(this.professor)
-      .subscribe(() => console.log('Professor criado com sucesso!'));
-  }
-
-  saveInfo(): void {
-    novaTurma.disciplinas = this.disciplinas;
+      .pipe(switchMap(() => this.getAllProfessorService.getAllProfessores()))
+      .subscribe(professores => {
+        professores.map(professor => {
+          this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
+        })
+      });
   }
 
   // validateDisciplinaForm(): void {
@@ -122,6 +128,10 @@ export class DisciplinasComponent implements OnInit {
   //     titulacao: [null, Validators.required]
   //   })
   // }
+
+  saveInfo(): void {
+    novaTurma.disciplinas = this.disciplinas;
+  }
 
   next(): void {
     this.saveInfo();
