@@ -1,7 +1,9 @@
+import { environment } from './src/environments/environment'
+
 const PROXY_CONFIG = [
   {
     context: ['/api'],
-    target: 'http://localhost:3000/',
+    target: environment.api,
     secure: false,
     logLevel: 'debug',
     pathRewrite: { '^/api': '' }
