@@ -3,19 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PoMenuModule } from '@po-ui/ng-components';
 
-import { MenuComponent } from './menu/menu.component';
-
 @NgModule({
-  declarations: [
-    MenuComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule,
     PoMenuModule
   ],
-  exports: [
-    MenuComponent
-  ]
+  exports: []
 })
 export class CoreModule { }
