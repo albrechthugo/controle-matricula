@@ -31,6 +31,13 @@
       "descricao": "Algoritmos",
       "professor": 1,
       "id": 1
+    },
+    {
+      "sigla": "QUI",
+      "cargaHoraria": 22,
+      "descricao": "Química",
+      "professor": 3,
+      "id": 3
     }
   ],
   "professores": [
@@ -41,6 +48,22 @@
       "titulacao": "Mestre",
       "disciplinasMinistradas": null,
       "id": 1
+    },
+    {
+      "nome": "Paula",
+      "email": "paula@teste.com.br",
+      "cpf": 1236,
+      "titulacao": "Doutor",
+      "disciplinasMinistradas": null,
+      "id": 3
+    },
+    {
+      "nome": "Aldair",
+      "email": "aldair@totvs.com",
+      "cpf": 123456789,
+      "titulacao": "Mestre",
+      "disciplinasMinistradas": null,
+      "id": 4
     }
   ]
 }

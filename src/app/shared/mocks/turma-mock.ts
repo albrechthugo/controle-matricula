@@ -1,6 +1,6 @@
-import { Turma } from '../../entities/turma/turma.interface';
+import { Turma } from "src/app/entities/turma/turma.interface";
 
-export const novaTurma: Turma = {
+export const NovaTurma: Turma = {
   descricao: null,
   anoLetivo: null,
   periodoLetivo: null,
