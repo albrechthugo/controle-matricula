@@ -7,6 +7,7 @@ PoContainerModule,
 PoFieldModule, 
 PoHttpInterceptorModule, 
 PoModalModule, 
+PoModule, 
 PoStepperModule } from '@po-ui/ng-components';
 import { AberturaRoutingModule } from './abertura-routing.module';
 
@@ -36,7 +37,7 @@ import { ValidationMessageModule } from 'src/app/shared/components/validation-me
     FormsModule,
     ReactiveFormsModule,
     ValidationMessageModule,
-    PoHttpInterceptorModule 
+    PoModule
   ]
 })
 export class AberturaModule { }
