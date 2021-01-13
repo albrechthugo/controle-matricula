@@ -6,7 +6,7 @@ import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 import { FormaDeIngresso } from '../../../entities/aluno/forma-ingresso/ingresso.enum';
 import { AlunosCriarService } from './services/alunos-criar.service';
-import { novaTurma } from 'src/app/shared/mocks/turma-mock';
+import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { AlunosGetAllService } from './services/alunos-get-all.service';
@@ -78,14 +78,14 @@ export class AlunosComponent implements OnInit {
   }
 
   criarTurma(): void {
-    this.criarTurmaService.abrirTurma(novaTurma)
+    this.criarTurmaService.abrirTurma(NovaTurma)
       .subscribe(() => {
         console.log('Turma criada com sucesso!');
       })
   }
 
   saveInfo(): void {
-    novaTurma.alunos = this.alunos;
+    NovaTurma.alunos = this.alunos;
     this.criarTurma();
   }
 

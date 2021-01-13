@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "controle-matricula"
+  "defaultProject": "controle-matricula",
+  "cli": {
+    "analytics": "c1d471e2-be24-4eec-83f0-7f20d591713a"
+  }
 }

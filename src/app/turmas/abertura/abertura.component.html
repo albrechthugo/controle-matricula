@@ -1,5 +1,7 @@
-<div class="wrapper">
-  <po-stepper #stepper>
+<po-page-default>
+  <po-stepper
+    #stepper
+    class="po-xl-12 po-lg-12 po-sl-12">
     <po-step p-label="Informações Básicas">
       <app-informacoes-basicas (nextStep)="stepper.next()"></app-informacoes-basicas>
     </po-step>
@@ -12,4 +14,4 @@
       <app-alunos></app-alunos>
     </po-step>
   </po-stepper>
-</div>
+</po-page-default>
