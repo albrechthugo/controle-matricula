@@ -1,5 +1,5 @@
 <div class="informacoes-container">
-  <form #alunoForm [formGroup]="form" class="form-group">
+  <form #form="ngForm" [formGroup]="infoForm" class="form-group">
     <div class="form-field">
       <label>Descrição</label>
       <input
@@ -8,15 +8,16 @@
         placeholder="Calouros 2021/1 ADS"
         [(ngModel)]="informacoesBasicas.descricao"
         formControlName="descricao"
+        p-required="true"
       >
 
       <app-validation-message 
-        *ngIf="form.get('descricao').errors?.required" 
+        *ngIf="infoForm.get('descricao').errors?.required && form.submitted" 
         textContent="Campo obrigatório">
       </app-validation-message>
 
       <app-validation-message 
-        *ngIf="form.get('descricao').errors?.maxlength" 
+        *ngIf="infoForm.get('descricao').errors?.maxlength && form.submitted" 
         textContent="Limite máximo de 30 caracteres">
       </app-validation-message>
     </div>
@@ -29,15 +30,16 @@
         placeholder="2021"
         [(ngModel)]="informacoesBasicas.anoLetivo"
         formControlName="anoLetivo"
+        p-required="true"
       >
 
       <app-validation-message 
-        *ngIf="form.get('anoLetivo').errors?.required" 
+        *ngIf="infoForm.get('anoLetivo').errors?.required && form.submitted" 
         textContent="Campo obrigatório">
       </app-validation-message>
 
       <app-validation-message 
-        *ngIf="form.get('anoLetivo').errors?.pattern" 
+        *ngIf="infoForm.get('anoLetivo').errors?.pattern && form.submitted" 
         textContent="Ex: 2020">
       </app-validation-message>
     </div>
@@ -50,15 +52,16 @@
         placeholder="1 ou 2 (semestre)"
         [(ngModel)]="informacoesBasicas.periodoLetivo"
         formControlName="periodoLetivo"
+        p-required="true"
       >
 
       <app-validation-message 
-        *ngIf="form.get('periodoLetivo').errors?.required" 
+        *ngIf="infoForm.get('periodoLetivo').errors?.required && form.submitted" 
         textContent="Campo obrigatório">
       </app-validation-message>
 
       <app-validation-message 
-        *ngIf="form.get('periodoLetivo').errors?.pattern" 
+        *ngIf="infoForm.get('periodoLetivo').errors?.pattern && form.submitted" 
         textContent="1° ou 2° semestre">
       </app-validation-message>
     </div>
@@ -71,29 +74,22 @@
         placeholder="Ex: 32"
         [(ngModel)]="informacoesBasicas.numeroVagas"
         formControlName="numeroVagas"
+        p-required="true"
       >
 
       <app-validation-message 
-        *ngIf="form.get('numeroVagas').errors?.required" 
+        *ngIf="infoForm.get('numeroVagas').errors?.required && form.submitted" 
         textContent="Campo obrigatório">
       </app-validation-message>
     </div>
-  </form>
 
-  <po-button 
-    *ngIf="form.valid; else disabledButton"
-    p-label="Próximo"
-    p-type="primary"
-    (p-click)="next()"
-  >
-  </po-button>
+    <!-- <button class="btn-create">proximo</button> -->
 
-  <ng-template #disabledButton>
     <po-button
-    p-label="Próximo"
-    p-type="primary"
-    p-disabled
+      p-label="Próximo"
+      p-type="primary"
+      (p-click)="next()"
     >
-  </po-button>
-  </ng-template>
+    </po-button>
+  </form>
 </div>
