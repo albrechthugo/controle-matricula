@@ -1,2 +1,10 @@
-<app-menu></app-menu>
-<router-outlet></router-outlet>
+<div class="po-wrapper">
+    <po-menu
+        p-logo="../../assets/images/logo.png"
+        p-short-logo="./assets/images/totvs-short-logo-grey.svg"
+        [p-menus]="menuItems"
+        [p-filter]=true 
+        p-collapsed=true>
+    </po-menu>
+    <router-outlet></router-outlet>
+</div>

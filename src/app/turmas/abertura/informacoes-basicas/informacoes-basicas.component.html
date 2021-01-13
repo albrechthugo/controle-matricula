@@ -1,95 +1,90 @@
-<div class="informacoes-container">
-  <form #form="ngForm" [formGroup]="infoForm" class="form-group">
-    <div class="form-field">
-      <label>Descrição</label>
-      <input
+<div>
+  <form #form="ngForm" [formGroup]="infoForm">
+    <div>
+      <po-input
+        p-label="Descrição"
         name="descricao"
-        type="text"
-        placeholder="Calouros 2021/1 ADS"
+        p-placeholder="Calouros 2021/1 ADS"
         [(ngModel)]="informacoesBasicas.descricao"
         formControlName="descricao"
-        p-required="true"
-      >
+        p-required="true">
+      </po-input>
 
       <app-validation-message 
-        *ngIf="infoForm.get('descricao').errors?.required && form.submitted" 
+        *ngIf="erro && !infoForm.get('descricao').value" 
         textContent="Campo obrigatório">
       </app-validation-message>
 
       <app-validation-message 
-        *ngIf="infoForm.get('descricao').errors?.maxlength && form.submitted" 
+        *ngIf="infoForm.get('descricao').errors
+          && infoForm.get('descricao').value" 
         textContent="Limite máximo de 30 caracteres">
       </app-validation-message>
     </div>
 
-    <div class="form-field">
-      <label>Ano Letivo</label>
-      <input
+    <div>
+      <po-number
+        p-label="Ano Letivo"
         name="anoLetivo"
-        type="number"
-        placeholder="2021"
+        p-placeholder="2021"
         [(ngModel)]="informacoesBasicas.anoLetivo"
         formControlName="anoLetivo"
-        p-required="true"
-      >
+        [p-required]="erro">
+      </po-number>
 
       <app-validation-message 
-        *ngIf="infoForm.get('anoLetivo').errors?.required && form.submitted" 
+        *ngIf="erro && !infoForm.get('anoLetivo').value" 
         textContent="Campo obrigatório">
       </app-validation-message>
-
       <app-validation-message 
         *ngIf="infoForm.get('anoLetivo').errors?.pattern && form.submitted" 
         textContent="Ex: 2020">
       </app-validation-message>
     </div>
 
-    <div class="form-field">
-      <label>Período Letivo</label>
-      <input
+    <div>
+      <po-number
+        p-label="Período Letivo"
         name="periodoLetivo"
-        type="number"
-        placeholder="1 ou 2 (semestre)"
+        p-placeholder="1 ou 2 (semestre)"
         [(ngModel)]="informacoesBasicas.periodoLetivo"
         formControlName="periodoLetivo"
-        p-required="true"
-      >
+        [p-required]="erro">
+      </po-number>
 
       <app-validation-message 
-        *ngIf="infoForm.get('periodoLetivo').errors?.required && form.submitted" 
+        *ngIf="erro && !infoForm.get('periodoLetivo').value" 
         textContent="Campo obrigatório">
       </app-validation-message>
 
       <app-validation-message 
-        *ngIf="infoForm.get('periodoLetivo').errors?.pattern && form.submitted" 
+          *ngIf="infoForm.get('periodoLetivo').value
+          && infoForm.get('periodoLetivo').value != 1
+          && infoForm.get('periodoLetivo').value != 2" 
         textContent="1° ou 2° semestre">
       </app-validation-message>
     </div>
 
-    <div class="form-field">
-      <label>Vagas</label>
-      <input
+    <div>
+      <po-input
+        p-label="Vagas"
         name="numeroVagas"
-        type="number"
-        placeholder="Ex: 32"
-        [(ngModel)]="informacoesBasicas.numeroVagas"
         formControlName="numeroVagas"
-        p-required="true"
-      >
+        [p-required]="erro"
+        [(ngModel)]="informacoesBasicas.numeroVagas"
+        p-placeholder="Informe a quantidade de vagas">
+      </po-input>
 
       <app-validation-message 
-        *ngIf="infoForm.get('numeroVagas').errors?.required && form.submitted" 
+        *ngIf="erro && !infoForm.get('numeroVagas').value" 
         textContent="Campo obrigatório">
       </app-validation-message>
     </div>
 
-    <!-- <button class="btn-create">proximo</button> -->
-
     <po-button
       p-label="Próximo"
       p-type="primary"
-      (p-click)="next()"
-    >
+      (p-click)="saveInfo()">
     </po-button>
   </form>
 </div>

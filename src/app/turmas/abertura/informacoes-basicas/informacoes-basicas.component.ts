@@ -13,6 +13,7 @@ export class InformacoesBasicasComponent implements OnInit {
 
   @Output()
   nextStep: EventEmitter<any> = new EventEmitter();
+  erro = false;
 
   informacoesBasicas: Turma = {
     descricao: null,
@@ -28,30 +29,32 @@ export class InformacoesBasicasComponent implements OnInit {
     numeroVagas: new FormControl()
   })
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-   this.infoForm = this.fb.group({
+    this.infoForm = this.fb.group({
       descricao: [null, [Validators.maxLength(30), Validators.required]],
       anoLetivo: [null, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
-      periodoLetivo: [null, [Validators.required, Validators.maxLength(1),Validators.pattern(/[1-2]{1}/)]],
-      numeroVagas: [null, [Validators.required]]
+      periodoLetivo: [null, [Validators.required, Validators.maxLength(1), Validators.pattern(/[1-2]{1}/)]],
+      numeroVagas: [null]
     });
   }
 
-  saveInfo(): void {
+  saveInfo(): any {
+    if (this.infoForm.valid) {
       NovaTurma.descricao = this.informacoesBasicas.descricao;
       NovaTurma.anoLetivo = this.informacoesBasicas.anoLetivo;
       NovaTurma.periodoLetivo = this.informacoesBasicas.periodoLetivo;
       NovaTurma.numeroVagas = this.informacoesBasicas.numeroVagas;
+      this.next();
+    } else {
+      return this.erro = true;
+    }
   }
 
   next(): void {
-    if(this.infoForm.valid && !this.infoForm.pending) {
-      this.saveInfo();
+    if (this.infoForm.valid) {
       this.nextStep.emit();
-    } else {
-      return;
     }
   }
 

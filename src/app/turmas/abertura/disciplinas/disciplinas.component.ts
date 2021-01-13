@@ -8,7 +8,7 @@ import { Professor } from '../../../entities/professor/professor.interface';
 import { Titulacao } from '../../../entities/professor/titulacao/titulacao.enum';
 import { ProfessoresCriarService } from '../../../services/professores/professores-criar.service';
 import { DisciplinasCriarService } from './services/disciplinas-criar.service';
-import { novaTurma } from 'src/app/shared/mocks/turma-mock';
+import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 import { ActivatedRoute } from '@angular/router';
 import { DisciplinaGetAllService } from './services/disciplina-get-all.service';
 import { ProfessoresGetAllService } from 'src/app/services/professores/professores-get-all.service';
@@ -126,7 +126,7 @@ export class DisciplinasComponent implements OnInit {
   // }
 
   saveInfo(): void {
-    novaTurma.disciplinas = this.disciplinas;
+    NovaTurma.disciplinas = this.disciplinas;
   }
 
   next(): void {
