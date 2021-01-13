@@ -29,8 +29,12 @@
         p-placeholder="2021"
         [(ngModel)]="informacoesBasicas.anoLetivo"
         formControlName="anoLetivo"
+<<<<<<< HEAD
+      >
+=======
         [p-required]="erro">
       </po-number>
+>>>>>>> origin/master
 
       <app-validation-message 
         *ngIf="erro && !infoForm.get('anoLetivo').value" 
@@ -49,8 +53,12 @@
         p-placeholder="1 ou 2 (semestre)"
         [(ngModel)]="informacoesBasicas.periodoLetivo"
         formControlName="periodoLetivo"
+<<<<<<< HEAD
+      >
+=======
         [p-required]="erro">
       </po-number>
+>>>>>>> origin/master
 
       <app-validation-message 
         *ngIf="erro && !infoForm.get('periodoLetivo').value" 
@@ -70,10 +78,14 @@
         p-label="Vagas"
         name="numeroVagas"
         formControlName="numeroVagas"
+<<<<<<< HEAD
+      >
+=======
         [p-required]="erro"
         [(ngModel)]="informacoesBasicas.numeroVagas"
         p-placeholder="Informe a quantidade de vagas">
       </po-input>
+>>>>>>> origin/master
 
       <app-validation-message 
         *ngIf="erro && !infoForm.get('numeroVagas').value" 

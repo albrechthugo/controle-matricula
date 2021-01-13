@@ -5,6 +5,7 @@ import {
 PoButtonModule, 
 PoContainerModule, 
 PoFieldModule, 
+PoHttpInterceptorModule, 
 PoModalModule, 
 PoModule, 
 PoStepperModule } from '@po-ui/ng-components';
