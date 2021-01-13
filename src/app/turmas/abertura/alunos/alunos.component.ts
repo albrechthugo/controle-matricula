@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 import { FormaDeIngresso } from '../../../entities/aluno/forma-ingresso/ingresso.enum';
 import { AlunosCriarService } from './services/alunos-criar.service';
-import { novaTurma } from 'src/app/shared/mocks/turma-mock';
-import { switchMap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 import { AlunosGetAllService } from './services/alunos-get-all.service';
 
 @Component({
@@ -68,24 +68,26 @@ export class AlunosComponent implements OnInit {
   }
 
   criarAluno(): void {
-    this.criarAlunoService.criarAluno(this.aluno)
+    if(this.alunoForm.valid && !this.alunoForm.pending) {
+      this.criarAlunoService.criarAluno(this.aluno)
       .pipe(switchMap(() => this.alunosGetAllService.getAllAlunos()))
       .subscribe(alunos => {
         alunos.map(aluno => {
           this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
         })
       });
+    }
   }
 
   criarTurma(): void {
-    this.criarTurmaService.abrirTurma(novaTurma)
+    this.criarTurmaService.abrirTurma(NovaTurma)
       .subscribe(() => {
         console.log('Turma criada com sucesso!');
       })
   }
 
   saveInfo(): void {
-    novaTurma.alunos = this.alunos;
+    NovaTurma.alunos = this.alunos;
     this.criarTurma();
   }
 

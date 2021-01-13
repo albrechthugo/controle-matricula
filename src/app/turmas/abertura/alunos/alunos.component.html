@@ -11,7 +11,7 @@
     p-title="Incluir novo aluno"
     p-size="sm"
   >
-    <form [formGroup]="alunoForm" class="form-group">
+    <form #form=ngForm [formGroup]="alunoForm" class="form-group" (submit)="criarAluno()">
       <div class="form-field">
         <label>Nome</label>
         <input
@@ -21,6 +21,12 @@
           placeholder="Keanu Reeves"
           formControlName="nome"
         >
+
+        <app-validation-message
+          *ngIf="alunoForm.get('nome').errors?.required && form.submitted"
+          textContent="Campo obrigatório"
+        >
+        </app-validation-message>
       </div>
 
       <div class="form-field">
@@ -32,6 +38,18 @@
           placeholder="keanureeves@legal.com"
           formControlName="email"
         >
+
+        <app-validation-message
+          *ngIf="alunoForm.get('email').errors?.required && form.submitted"
+          textContent="Campo obrigatório"
+        >
+        </app-validation-message>
+
+        <app-validation-message
+          *ngIf="alunoForm.get('email').errors?.email && form.submitted"
+          textContent="Email inválido"
+        >
+        </app-validation-message>
       </div>
 
       <div class="form-field">
@@ -43,6 +61,18 @@
           placeholder="123.456.789-00"
           formControlName="cpf"
         >
+
+        <app-validation-message
+          *ngIf="alunoForm.get('cpf').errors?.required && form.submitted"
+          textContent="Campo obrigatório"
+        >
+        </app-validation-message>
+
+        <app-validation-message
+          *ngIf="alunoForm.get('cpf').errors?.pattern && form.submitted"
+          textContent="Ex: 123.456.789-00"
+        >
+        </app-validation-message>
       </div>
 
       <div class="form-field">
@@ -54,6 +84,18 @@
           placeholder="Ex: 45892"
           formControlName="matricula"
         >
+
+        <app-validation-message
+          *ngIf="alunoForm.get('matricula').errors?.required && form.submitted"
+          textContent="Campo obrigatório"
+        >
+        </app-validation-message>
+
+        <app-validation-message
+          *ngIf="alunoForm.get('matricula').errors?.pattern && form.submitted"
+          textContent="Utilize apenas 6 dígitos"
+        >
+        </app-validation-message>
       </div>
 
       <div class="form-field">
@@ -65,10 +107,16 @@
           formControlName="formaIngresso"
         >
         </po-select>
-      </div>
-    </form>
 
-    <button class="btn-create" (click)="criarAluno()">Adicionar</button>
+        <app-validation-message
+          *ngIf="alunoForm.get('formaIngresso').errors?.required && form.submitted"
+          textContent="Campo obrigatório"
+        >
+        </app-validation-message>
+      </div>
+
+      <button class="btn-create">Adicionar</button>
+    </form>
   </po-modal>
 
   <po-button

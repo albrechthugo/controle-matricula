@@ -13,7 +13,7 @@ export class InformacoesBasicasComponent implements OnInit {
 
   @Output()
   nextStep: EventEmitter<any> = new EventEmitter();
-
+  
   informacoesBasicas: Turma = {
     descricao: null,
     anoLetivo: null,

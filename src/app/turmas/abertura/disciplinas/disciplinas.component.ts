@@ -8,7 +8,7 @@ import { Professor } from '../../../entities/professor/professor.interface';
 import { Titulacao } from '../../../entities/professor/titulacao/titulacao.enum';
 import { ProfessoresCriarService } from '../../../services/professores/professores-criar.service';
 import { DisciplinasCriarService } from './services/disciplinas-criar.service';
-import { novaTurma } from 'src/app/shared/mocks/turma-mock';
+import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 import { ActivatedRoute } from '@angular/router';
 import { DisciplinaGetAllService } from './services/disciplina-get-all.service';
 import { ProfessoresGetAllService } from 'src/app/services/professores/professores-get-all.service';
@@ -63,7 +63,6 @@ export class DisciplinasComponent implements OnInit {
     nome: new FormControl(),
     email: new FormControl(),
     cpf: new FormControl(),
-    titulacao: new FormControl()
   });
 
   constructor(
@@ -84,49 +83,48 @@ export class DisciplinasComponent implements OnInit {
     this.professores = this.activatedRoute.snapshot.data['professores'];
     this.professores.map(professor => {
       this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
-    })
+    });
+
+    this.disciplinaForm = this.fb.group({
+      sigla: [null, [Validators.maxLength(4), Validators.required]],
+      cargaHoraria: [null, Validators.required],
+      descricao: [null, Validators.maxLength],
+      professor: [null, Validators.required]
+    });
+
+    this.professorForm = this.fb.group({
+      nome: [null, [Validators.maxLength(40), Validators.required]],
+      email: [null, [Validators.email, Validators.required]],
+      cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]]
+    });
   }
 
   criarDisciplina(): void {
-    this.criarDisciplinaService.criarDisciplina(this.disciplina)
-      .pipe(switchMap(() => this.disciplinaGetAllService.getAllDisciplinas()))
-      .subscribe(disciplinas => {
-        disciplinas.map(disciplina =>{
-          this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
-        })
-      });
+    if(this.disciplinaForm.valid && !this.disciplinaForm.pending) {
+      this.criarDisciplinaService.criarDisciplina(this.disciplina)
+        .pipe(switchMap(() => this.disciplinaGetAllService.getAllDisciplinas()))
+        .subscribe(disciplinas => {
+          disciplinas.map(disciplina =>{
+            this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
+          })
+        });
+    }
   }
 
   criarProfessor(): void {
-    this.criarProfessorService.criarProfessor(this.professor)
-      .pipe(switchMap(() => this.professoresGetAllService.getAllProfessores()))
-      .subscribe(professores => {
-        professores.map(professor => {
-          this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
-        })
-      });
+    if(this.professorForm.valid && !this.professorForm.pending) {
+      this.criarProfessorService.criarProfessor(this.professor)
+        .pipe(switchMap(() => this.professoresGetAllService.getAllProfessores()))
+        .subscribe(professores => {
+          professores.map(professor => {
+            this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
+          })
+        });
+    }
   }
 
-  // validateDisciplinaForm(): void {
-  //   this.disciplinaForm = this.fb.group({
-  //     sigla: [null, [Validators.maxLength(4), Validators.required]],
-  //     cargaHoraria: [null, [Validators.maxLength(2), Validators.required]],
-  //     descricao: [null, [Validators.maxLength(4), Validators.required]],
-  //     professor: [null, Validators.required]
-  //   })
-  // }
-
-  // validateProfessorForm(): void {
-  //   this.professorForm = this.fb.group({
-  //     nome: [null, [Validators.maxLength(40), Validators.required]],
-  //     email: [null, [Validators.email, Validators.required]],
-  //     cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]],
-  //     titulacao: [null, Validators.required]
-  //   })
-  // }
-
   saveInfo(): void {
-    novaTurma.disciplinas = this.disciplinas;
+    NovaTurma.disciplinas = this.disciplinas;
   }
 
   next(): void {
