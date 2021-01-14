@@ -9,11 +9,7 @@ import { PoMenuItem } from '@po-ui/ng-components';
 export class AppComponent implements OnInit{
   title = 'controle-matricula';
 
-  private _menuItems: Array<PoMenuItem> = [];
-  get menuItems() {
-    return this._menuItems;
-  }
-
+  private _menuItems: PoMenuItem[];
   private _iconHome = 'po-icon-home'
   private _iconWareHouse = 'po-icon-warehouse';
 
@@ -21,6 +17,10 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.setMenuItems();
+  }
+
+  get menuItems() {
+    return this._menuItems;
   }
 
   private setMenuItems() {
