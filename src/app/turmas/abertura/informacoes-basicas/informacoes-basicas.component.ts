@@ -13,7 +13,8 @@ export class InformacoesBasicasComponent implements OnInit {
 
   @Output()
   nextStep: EventEmitter<any> = new EventEmitter();
-  erro = false;
+
+  hasError: boolean = false;
 
   informacoesBasicas: Turma = {
     descricao: null,
@@ -40,20 +41,20 @@ export class InformacoesBasicasComponent implements OnInit {
     });
   }
 
-  saveInfo(): any {
-    if (this.infoForm.valid) {
+  saveInfo(): void {
+    if(this.infoForm.valid) {
       NovaTurma.descricao = this.informacoesBasicas.descricao;
       NovaTurma.anoLetivo = this.informacoesBasicas.anoLetivo;
       NovaTurma.periodoLetivo = this.informacoesBasicas.periodoLetivo;
       NovaTurma.numeroVagas = this.informacoesBasicas.numeroVagas;
       this.next();
     } else {
-      return this.erro = true;
+      this.hasError = true;
     }
   }
 
   next(): void {
-    if (this.infoForm.valid) {
+    if(this.infoForm.valid) {
       this.nextStep.emit();
     }
   }

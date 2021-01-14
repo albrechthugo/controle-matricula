@@ -23,10 +23,11 @@ export class DisciplinasComponent implements OnInit {
   @Output()
   nextStep: EventEmitter<any> = new EventEmitter();
 
+  hasErrorOnProfessorForm: boolean = false;
+  hasErrorOnDisciplinaForm: boolean = false;
+
   disciplinasOptions: PoMultiselectOption[] = [];
-
   disciplinas: Disciplina[] = [];
-
   disciplina: Disciplina = {
     sigla: null,
     cargaHoraria: null,
@@ -42,9 +43,7 @@ export class DisciplinasComponent implements OnInit {
   });
 
   professoresOptions: PoSelectOption[] = [];
-
   professores: Professor[] = [];
-
   professor: Professor = {
     nome: null,
     email: null,
@@ -100,7 +99,7 @@ export class DisciplinasComponent implements OnInit {
   }
 
   criarDisciplina(): void {
-    if(this.disciplinaForm.valid && !this.disciplinaForm.pending) {
+    if(this.disciplinaForm.valid) {
       this.criarDisciplinaService.criarDisciplina(this.disciplina)
         .pipe(switchMap(() => this.disciplinaGetAllService.getAllDisciplinas()))
         .subscribe(disciplinas => {
@@ -108,11 +107,13 @@ export class DisciplinasComponent implements OnInit {
             this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
           })
         });
+    } else {
+      this.hasErrorOnDisciplinaForm = true;
     }
   }
 
   criarProfessor(): void {
-    if(this.professorForm.valid && !this.professorForm.pending) {
+    if(this.professorForm.valid) {
       this.criarProfessorService.criarProfessor(this.professor)
         .pipe(switchMap(() => this.professoresGetAllService.getAllProfessores()))
         .subscribe(professores => {
@@ -120,6 +121,8 @@ export class DisciplinasComponent implements OnInit {
             this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
           })
         });
+    } else {
+      this.hasErrorOnProfessorForm = true;
     }
   }
 
@@ -128,7 +131,9 @@ export class DisciplinasComponent implements OnInit {
   }
 
   next(): void {
-    this.saveInfo();
-    this.nextStep.emit();
+    if(this.disciplinaForm.valid && this.professorForm.valid) {
+      this.saveInfo();
+      this.nextStep.emit();
+    }
   }
 }

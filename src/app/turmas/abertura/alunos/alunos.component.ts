@@ -18,6 +18,8 @@ import { AlunosGetAllService } from './services/alunos-get-all.service';
 })
 export class AlunosComponent implements OnInit {
 
+  hasError: boolean = false;
+
   formaIngressoOptions: PoSelectOption[] = [
     { label: 'ENADE', value: FormaDeIngresso.ENADE },
     { label: 'VESTIBULAR', value: FormaDeIngresso.VESTIBULAR }
@@ -68,7 +70,7 @@ export class AlunosComponent implements OnInit {
   }
 
   criarAluno(): void {
-    if(this.alunoForm.valid && !this.alunoForm.pending) {
+    if(this.alunoForm.valid) {
       this.criarAlunoService.criarAluno(this.aluno)
       .pipe(switchMap(() => this.alunosGetAllService.getAllAlunos()))
       .subscribe(alunos => {
@@ -76,6 +78,8 @@ export class AlunosComponent implements OnInit {
           this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
         })
       });
+    } else {
+      this.hasError = true;
     }
   }
 
@@ -87,8 +91,10 @@ export class AlunosComponent implements OnInit {
   }
 
   saveInfo(): void {
-    NovaTurma.alunos = this.alunos;
-    this.criarTurma();
+    if(this.alunoForm.valid) {
+      NovaTurma.alunos = this.alunos;
+      this.criarTurma();
+    }
   }
 
 }
