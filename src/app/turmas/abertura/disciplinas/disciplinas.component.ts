@@ -12,6 +12,8 @@ import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 import { ActivatedRoute } from '@angular/router';
 import { DisciplinaGetAllService } from './services/disciplina-get-all.service';
 import { ProfessoresGetAllService } from 'src/app/services/professores/professores-get-all.service';
+import { ProfessoresEditarService } from 'src/app/services/professores/professores-editar.service';
+import { ProfessoresGetByIdService } from 'src/app/services/professores/professores-get-by-id.service';
 
 @Component({
   selector: 'app-disciplinas',
@@ -49,7 +51,7 @@ export class DisciplinasComponent implements OnInit {
     email: null,
     cpf: null,
     titulacao: null,
-    disciplinasMinistradas: null
+    disciplinasMinistradas: []
   }
 
   titulacaoProfessorOptions: PoSelectOption[] = [
@@ -66,9 +68,11 @@ export class DisciplinasComponent implements OnInit {
 
   constructor(
     private criarDisciplinaService: DisciplinasCriarService,
-    private criarProfessorService: ProfessoresCriarService,
     private disciplinaGetAllService: DisciplinaGetAllService,
+    private criarProfessorService: ProfessoresCriarService,
     private professoresGetAllService: ProfessoresGetAllService,
+    private editarProfessorService: ProfessoresEditarService,
+    private professoresGetByIdService: ProfessoresGetByIdService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -94,7 +98,7 @@ export class DisciplinasComponent implements OnInit {
     this.professorForm = this.fb.group({
       nome: [null, [Validators.maxLength(40), Validators.required]],
       email: [null, [Validators.email, Validators.required]],
-      cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]]
+      cpf: [null, [Validators.required]]
     });
   }
 
@@ -124,6 +128,14 @@ export class DisciplinasComponent implements OnInit {
     } else {
       this.hasErrorOnProfessorForm = true;
     }
+  }
+
+  relacionarDisciplinaComProfessor(id: number): void {
+    this.professoresGetByIdService.professorGetById(id)
+      .subscribe(professor => {
+        professor.disciplinasMinistradas = [...professor.disciplinasMinistradas, this.disciplina];
+        // console.log(professor)
+      });
   }
 
   saveInfo(): void {

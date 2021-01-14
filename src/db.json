@@ -64,6 +64,14 @@
       "titulacao": "Mestre",
       "disciplinasMinistradas": null,
       "id": 4
+    },
+    {
+      "nome": "aaaa",
+      "email": "aaaa@com",
+      "cpf": 123456789,
+      "titulacao": "Mestre",
+      "disciplinasMinistradas": [],
+      "id": 5
     }
   ]
 }
