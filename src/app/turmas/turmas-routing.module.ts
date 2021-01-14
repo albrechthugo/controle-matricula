@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LandingComponent } from './landing/landing.component';
-
 const turmasRoutes: Routes = [
   {
     path: '',
-    component: LandingComponent
+    pathMatch: 'full',
+    redirectTo: 'abertura'
   },
   {
     path: 'abertura',
