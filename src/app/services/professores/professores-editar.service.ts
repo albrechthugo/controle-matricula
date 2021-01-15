@@ -12,6 +12,6 @@ export class ProfessoresEditarService {
   constructor(private http: HttpClient) { }
 
   editarProfessor(professor: Professor): Observable<Professor> {
-    return this.http.post<Professor>(`api/professores/${professor.id}`, professor);
+    return this.http.put<Professor>(`api/professores/${professor.id}`, professor);
   }
 }
