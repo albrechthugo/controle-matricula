@@ -64,9 +64,9 @@
         <label>Professor</label>
         <po-select
           name="professor"
-          [(ngModel)]="disciplina.professor"
+          formControlName="professor"
           [p-options]="professoresOptions"
-          formControlName="professor">
+          (p-change)="relacionarProfessorComDisciplina($event)">
         </po-select>
 
         <app-validation-message

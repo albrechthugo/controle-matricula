@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 import { Disciplina } from 'src/app/entities/disciplina/disciplina.interface';
 import { Professor } from '../../../entities/professor/professor.interface';
@@ -51,7 +51,7 @@ export class DisciplinasComponent implements OnInit {
     email: null,
     cpf: null,
     titulacao: null,
-    disciplinasMinistradas: []
+    disciplinasMinistradas: null
   }
 
   titulacaoProfessorOptions: PoSelectOption[] = [
@@ -107,7 +107,7 @@ export class DisciplinasComponent implements OnInit {
       this.criarDisciplinaService.criarDisciplina(this.disciplina)
         .pipe(switchMap(() => this.disciplinaGetAllService.getAllDisciplinas()))
         .subscribe(disciplinas => {
-          disciplinas.map(disciplina =>{
+          disciplinas.map(disciplina => {
             this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
           })
         });
@@ -130,11 +130,24 @@ export class DisciplinasComponent implements OnInit {
     }
   }
 
-  relacionarDisciplinaComProfessor(id: number): void {
+  relacionarProfessorComDisciplina(id: number): void {
     this.professoresGetByIdService.professorGetById(id)
       .subscribe(professor => {
-        professor.disciplinasMinistradas = [...professor.disciplinasMinistradas, this.disciplina];
-        // console.log(professor)
+        if(!professor.disciplinasMinistradas) {
+          professor.disciplinasMinistradas = [];
+        }
+
+        professor.disciplinasMinistradas = [...professor.disciplinasMinistradas ,{
+          sigla: this.disciplina.sigla,
+          descricao: this.disciplina.descricao,
+          cargaHoraria: this.disciplina.cargaHoraria,
+          id: this.disciplina.id
+        }];        
+        
+        this.editarProfessorService.editarProfessor(professor)
+          .subscribe(() => console.log('Relacionou e editou!'));
+
+        this.disciplina.professor = professor;
       });
   }
 
@@ -143,7 +156,7 @@ export class DisciplinasComponent implements OnInit {
   }
 
   next(): void {
-    if(this.disciplinaForm.valid && this.professorForm.valid) {
+    if(this.disciplinaForm.valid) {
       this.saveInfo();
       this.nextStep.emit();
     }
