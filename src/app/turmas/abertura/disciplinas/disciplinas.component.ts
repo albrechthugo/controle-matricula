@@ -14,10 +14,10 @@ import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 export class DisciplinasComponent implements OnInit {
 
   @Output()
-  nextStep: EventEmitter<any> = new EventEmitter();
+  nextStep = new EventEmitter<any>();
 
   @Output()
-  previousStep: EventEmitter<any> = new EventEmitter();
+  previousStep = new EventEmitter<any>();
 
   disciplinasOptions: PoMultiselectOption[] = [];
   disciplinas: Disciplina[] = [];

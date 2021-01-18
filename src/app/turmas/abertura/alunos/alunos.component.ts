@@ -5,8 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
-import { TesteService } from '../teste.service';
-
 @Component({
   selector: 'app-alunos',
   templateUrl: './alunos.component.html',
@@ -15,10 +13,10 @@ import { TesteService } from '../teste.service';
 export class AlunosComponent implements OnInit {
 
   @Output()
-  firstStep: EventEmitter<any> = new EventEmitter();
+  firstStep = new EventEmitter<any>();
 
   @Output()
-  previousStep: EventEmitter<any> = new EventEmitter();
+  previousStep = new EventEmitter<any>();
 
   alunos: Aluno[] = [];
   alunosOptions: PoMultiselectOption[] = [];
@@ -26,7 +24,6 @@ export class AlunosComponent implements OnInit {
   constructor(
     private criarTurmaService: TurmaCriarService,
     private activatedRoute: ActivatedRoute,
-    private testeservice: TesteService
   ) {}
 
 
@@ -51,20 +48,19 @@ export class AlunosComponent implements OnInit {
   saveInfoAndFinish(): void {
     NovaTurma.alunos = this.alunos;
 
-    if(NovaTurma.alunos) {
+    if(NovaTurma.alunos.length) {
       this.criarTurma();
     }
 
-    this.testeservice.testeee.subscribe(teste => console.log(teste))
-    // this.redirectToFirstStep();
+    this.redirectToFirstStep();
   }
 
   previous(): void {
     this.previousStep.emit();
   }
 
-  // redirectToFirstStep(): void {
-  //   this.firstStep.emit();
-  // }
+  redirectToFirstStep(): void {
+    this.firstStep.emit();
+  }
 
 }

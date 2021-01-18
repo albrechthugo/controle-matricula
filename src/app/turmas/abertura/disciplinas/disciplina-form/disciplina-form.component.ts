@@ -22,7 +22,7 @@ import { DisciplinasCriarService } from '../services/disciplinas-criar.service';
 export class DisciplinaFormComponent implements OnInit {
 
   @Output()
-  listaDisciplinasOptions: EventEmitter<any> = new EventEmitter();
+  listaDisciplinasOptions = new EventEmitter<any>();
 
   hasErrorOnProfessorForm: boolean = false;
   hasErrorOnDisciplinaForm: boolean = false;
@@ -91,7 +91,7 @@ export class DisciplinaFormComponent implements OnInit {
     this.professorForm = this.fb.group({
       nome: [null, [Validators.maxLength(40), Validators.required]],
       email: [null, [Validators.email, Validators.required]],
-      cpf: [null, [Validators.required]],
+      cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]],
       titulacao: [null]
     });
   }
@@ -100,12 +100,16 @@ export class DisciplinaFormComponent implements OnInit {
     if(this.disciplinaForm.valid) {
       this.criarDisciplinaService.criarDisciplina(this.disciplina)
         .pipe(switchMap(() => this.disciplinaGetAllService.getAllDisciplinas()))
-        .subscribe(disciplinas => {
-          disciplinas.map(disciplina => {
-            this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
-          })
+        .subscribe({
+          next: disciplinas => {
+            disciplinas.map(disciplina => {
+              this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
+            });
 
-          this.listaDisciplinasOptions.emit(this.disciplinasOptions);
+            this.listaDisciplinasOptions.emit(this.disciplinasOptions);
+            this.disciplinaForm.reset();
+          },
+          error: err => console.log(err)
         });
 
         this.editarProfessor();
@@ -118,10 +122,15 @@ export class DisciplinaFormComponent implements OnInit {
     if(this.professorForm.valid) {
       this.criarProfessorService.criarProfessor(this.professor)
         .pipe(switchMap(() => this.professoresGetAllService.getAllProfessores()))
-        .subscribe(professores => {
-          professores.map(professor => {
-            this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
-          })
+        .subscribe({
+          next: professores => {
+            professores.map(professor => {
+              this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
+            });
+
+            this.professorForm.reset();
+          },
+          error: err => console.log(err)
         });
     } else {
       this.hasErrorOnProfessorForm = true;

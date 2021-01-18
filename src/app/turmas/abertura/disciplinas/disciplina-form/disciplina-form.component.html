@@ -1,13 +1,13 @@
 <form [formGroup]="disciplinaForm" class="form-group">
   <div class="form-field">
     <label>Sigla</label>
-    <input
+    <po-input
       type="text"
       placeholder="AGT"
       name="sigla"
       [(ngModel)]="disciplina.sigla"
-      formControlName="sigla"
-    >
+      formControlName="sigla">
+    </po-input>
 
     <app-validation-message
       *ngIf="hasErrorOnDisciplinaForm && !disciplinaForm.get('sigla').value"
@@ -22,13 +22,13 @@
 
   <div class="form-field">
     <label>Descrição</label>
-    <input
+    <po-input
       type="text"
       placeholder="Algoritmos"
       name="descricao"
       [(ngModel)]="disciplina.descricao"
-      formControlName="descricao"
-    >
+      formControlName="descricao">
+    </po-input>
 
     <app-validation-message
       *ngIf="hasErrorOnDisciplinaForm && !disciplinaForm.get('descricao').value"
@@ -38,13 +38,13 @@
 
   <div class="form-field">
     <label>Carga Horária</label>
-    <input
+    <po-input
       type="number"
       placeholder="Ex: 16 (horas)"
       name="cargaHoraria"
       [(ngModel)]="disciplina.cargaHoraria"
-      formControlName="cargaHoraria"
-    >
+      formControlName="cargaHoraria">
+    </po-input>
 
     <app-validation-message
       *ngIf="hasErrorOnDisciplinaForm && !disciplinaForm.get('cargaHoraria').value"
@@ -77,13 +77,13 @@
     <form [formGroup]="professorForm" class="form-group">
       <div class="form-field">
         <label>Nome</label>
-        <input
+        <po-input
           type="text"
           placeholder="Messias"
           name="nome"
           [(ngModel)]="professor.nome"
-          formControlName="nome"
-        >
+          formControlName="nome">
+        </po-input>
 
         <app-validation-message
           *ngIf="hasErrorOnProfessorForm && !professorForm.get('nome').value"
@@ -98,13 +98,13 @@
 
       <div class="form-field">
         <label>E-mail</label>
-        <input
+        <po-input
           type="text"
           placeholder="messias@jacó.com"
           name="email"
           [(ngModel)]="professor.email"
-          formControlName="email"
-        >
+          formControlName="email">
+        </po-input>
 
         <app-validation-message
           *ngIf="hasErrorOnProfessorForm && !professorForm.get('email').value"
@@ -119,13 +119,13 @@
 
       <div class="form-field">
         <label>CPF</label>
-        <input
-          type="number"
+        <po-input
+          type="text"
           placeholder="777.777.777-77"
           name="cpf"
           [(ngModel)]="professor.cpf"
-          formControlName="cpf"
-        >
+          formControlName="cpf">
+        </po-input>
 
         <app-validation-message
           *ngIf="hasErrorOnProfessorForm && !professorForm.get('cpf').value"

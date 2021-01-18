@@ -10,15 +10,3 @@
 .form-field label {
   color: var(--color-primary);
 }
-
-.form-field input {
-  border-radius: 5px;
-  height: 30px;
-  border: 1px solid rgba(0,0,0, .2);
-  box-shadow: inset 0 1px 8px 0 rgba(0,0,0,.1);
-  padding: 0 5px;
-}
-
-.form-field input:focus {
-  border: 1px solid rgba(0,0,0, .4);
-}

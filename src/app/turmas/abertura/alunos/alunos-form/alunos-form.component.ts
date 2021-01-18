@@ -16,7 +16,7 @@ import { AlunosGetAllService } from '../services/alunos-get-all.service';
 export class AlunosFormComponent implements OnInit {
 
   @Output()
-  listaAlunos: EventEmitter<any> = new EventEmitter();
+  listaAlunos = new EventEmitter<any>();
 
   hasError: boolean = false;
 
@@ -63,13 +63,17 @@ export class AlunosFormComponent implements OnInit {
 
       this.criarAlunoService.criarAluno(aluno)
       .pipe(switchMap(() => this.alunosGetAllService.getAllAlunos()))
-      .subscribe(alunos => {
-        alunos.map(aluno => {
-          this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
-        });
+      .subscribe({
+          next: alunos => {
+            alunos.map(aluno => {
+              this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
+            });
 
-        this.listaAlunos.emit(this.alunosOptions);
-      });
+            this.listaAlunos.emit(this.alunosOptions);
+            this.alunoForm.reset();
+          },
+          error: err => console.log(err)
+        });
     } else {
       this.hasError = true;
     }

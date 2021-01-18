@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { TesteService } from '../teste.service'
-
 import { NovaTurma } from '../../../shared/mocks/turma-mock';
+import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 
 @Component({
   selector: 'app-informacoes-basicas',
@@ -13,7 +12,7 @@ import { NovaTurma } from '../../../shared/mocks/turma-mock';
 export class InformacoesBasicasComponent implements OnInit {
 
   @Output()
-  nextStep: EventEmitter<any> = new EventEmitter();
+  nextStep = new EventEmitter<any>();
 
   hasError: boolean = false;
   algo: boolean = false;
@@ -25,7 +24,7 @@ export class InformacoesBasicasComponent implements OnInit {
     numeroVagas: new FormControl()
   })
 
-  constructor(private fb: FormBuilder, private testeservice: TesteService) { }
+  constructor(private fb: FormBuilder, private criarTurmaService: TurmaCriarService) { }
 
   ngOnInit(): void {
     this.informacoesBasicasForm = this.fb.group({
@@ -35,13 +34,8 @@ export class InformacoesBasicasComponent implements OnInit {
       numeroVagas: [null]
     });
 
-    if(this.algo) {
-      return;
-    }
-
-    this.testeservice.testeee.subscribe(teste => {
-      this.algo = true
-      this.resetaForm()
+    this.criarTurmaService.canResetForm.subscribe(() => {
+      this.resetaForm();
     })
   }
 
