@@ -1,27 +1,30 @@
-# ControleMatricula
+<h1 align="center">
+  🎓 Controle de Matrículas
+</h1>
+<p align="center">Gerencie matrículas de uma universidade, cadastrando novas turmas, incluindo suas respectivas disciplinas, professores e alunos.</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.4.
+<div align="center">
+  <img src="https://img.shields.io/badge/Angular-11.0.4-c3002f"> 
+  <img src="https://img.shields.io/badge/POUI-4.2.0-c93b85">
+</div>
 
-## Development server
+## Development Server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Rode `npm run start` ou `yarn start` para um servidor de desenvolvimento. Navegue para `http://localhost:4200/`.
 
-## Code scaffolding
+## Development API
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Rode `npm run server` ou `yarn server` para iniciar uma api fake para consumo e inserção de dados. Você pode ver os endpoints disponíveis navegando até `http://localhost:3000/`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Rode `npm run build` ou `yarn build` para buildar o projeto. O build vai ser armazenado no diretório `dist/`. Use a flag `--prod` para o build de produção.
 
-## Running unit tests
+## Testes unitários
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Rode `npm run test` ou `yarn test` para executar os testes unitários via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Testes de integração
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Rode `npm run e2e` ou `yarn e2e` para executar os testes de integração via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
