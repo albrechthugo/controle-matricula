@@ -9,107 +9,7 @@
     #novoAluno
     p-title="Incluir novo aluno"
     p-size="sm">
-    <form [formGroup]="alunoForm" class="form-group">
-      <div class="form-field">
-        <label>Nome</label>
-        <po-input
-          [(ngModel)]="aluno.nome"
-          type="text"
-          name="nome"
-          placeholder="Keanu Reeves"
-          formControlName="nome">
-        </po-input>
-
-        <app-validation-message
-          *ngIf="hasError && !alunoForm.get('nome').value"
-          textContent="Campo obrigatório">
-        </app-validation-message>
-      </div>
-
-      <div class="form-field">
-        <label>Email</label>
-        <po-input
-          [(ngModel)]="aluno.email"
-          type="text"
-          name="email"
-          placeholder="keanureeves@legal.com"
-          formControlName="email">
-        </po-input>
-
-        <app-validation-message
-          *ngIf="hasError && !alunoForm.get('email').value"
-          textContent="Campo obrigatório">
-        </app-validation-message>
-
-        <app-validation-message
-          *ngIf="alunoForm.get('email').errors?.email"
-          textContent="Email inválido">
-        </app-validation-message>
-      </div>
-
-      <div class="form-field">
-        <label>CPF</label>
-        <po-input
-          [(ngModel)]="aluno.cpf"
-          type="text"
-          name="cpf"
-          placeholder="123.456.789-00"
-          formControlName="cpf">
-        </po-input>
-
-        <app-validation-message
-          *ngIf="hasError && !alunoForm.get('cpf').value"
-          textContent="Campo obrigatório">
-        </app-validation-message>
-
-        <app-validation-message
-          *ngIf="alunoForm.get('cpf').errors?.pattern"
-          textContent="Ex: 123.456.789-00">
-        </app-validation-message>
-      </div>
-
-      <div class="form-field">
-        <label>Matrícula</label>
-        <po-input
-          [(ngModel)]="aluno.matricula"
-          type="number"
-          name="matricula"
-          placeholder="Ex: 45892"
-          formControlName="matricula">
-        </po-input>
-
-        <app-validation-message
-          *ngIf="hasError && !alunoForm.get('matricula').value"
-          textContent="Campo obrigatório">
-        </app-validation-message>
-
-        <app-validation-message
-          *ngIf="alunoForm.get('matricula').errors?.pattern"
-          textContent="Utilize apenas 6 dígitos">
-        </app-validation-message>
-      </div>
-
-      <div class="form-field">
-        <label>Forma de Ingresso</label>
-        <po-select
-          name="formaIngresso"
-          [(ngModel)]="aluno.formaIngresso"
-          [p-options]="formaIngressoOptions"
-          formControlName="formaIngresso">
-        </po-select>
-
-        <app-validation-message
-          *ngIf="hasError && !alunoForm.get('formaIngresso').value"
-          textContent="Campo obrigatório">
-        </app-validation-message>
-      </div>
-
-      <po-button
-        p-type="secondary"
-        p-label="Adicionar"
-        (p-click)="criarAluno()">
-      </po-button>
-    </form>
+    <app-alunos-form (listaAlunos)="updateOptions($event)"></app-alunos-form>
   </po-modal>
 
   <po-button
@@ -119,8 +19,16 @@
   </po-button>
 
   <po-button
+    p-label="Voltar"
+    p-type="secondary"
+    class="btn-previous"
+    (p-click)="previous()">
+  </po-button>
+
+  <po-button
     p-label="Concluir"
     p-type="primary"
-    (p-click)="saveInfo()">
+    (p-click)="saveInfoAndFinish()"
+    class="btn-next">
   </po-button>
 </div>

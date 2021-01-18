@@ -1,0 +1,12 @@
+.form-group, .form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  margin-bottom: 5px;
+}
+
+.form-field label {
+  color: var(--color-primary);
+}

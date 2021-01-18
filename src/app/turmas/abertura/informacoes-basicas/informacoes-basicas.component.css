@@ -39,14 +39,7 @@
 }
 
 .btn-next {
-  margin-top: 30px;
-}
-
-.btn-create {
-  width: 100px;
-  height: 30px;
-  border-radius: 5px;
-  background-color: var(--color-secondary);
-  color: var(--color-white);
-  cursor: pointer;
+  position: absolute;
+  right: 35px;
+  bottom: 30px;
 }
