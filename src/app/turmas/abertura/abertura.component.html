@@ -1,17 +1,23 @@
 <po-page-default>
   <po-stepper
     #stepper
-    class="po-xl-12 po-lg-12 po-sl-12">
+    class="po-xl-12 po-lg-12 po-sl-12 wrapper">
     <po-step p-label="Informações Básicas">
       <app-informacoes-basicas (nextStep)="stepper.next()"></app-informacoes-basicas>
     </po-step>
 
     <po-step p-label="Disciplinas">
-      <app-disciplinas (nextStep)="stepper.next()"></app-disciplinas>
+      <app-disciplinas
+        (previousStep)="stepper.previous()"
+        (nextStep)="stepper.next()">
+      </app-disciplinas>
     </po-step>
 
     <po-step p-label="Alunos">
-      <app-alunos></app-alunos>
+      <app-alunos
+        (previousStep)="stepper.previous()">
+        (firstStep)="stepper.first()"
+      </app-alunos>
     </po-step>
   </po-stepper>
 </po-page-default>

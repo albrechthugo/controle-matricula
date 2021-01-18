@@ -1,0 +1,163 @@
+<form [formGroup]="disciplinaForm" class="form-group">
+  <div class="form-field">
+    <label>Sigla</label>
+    <input
+      type="text"
+      placeholder="AGT"
+      name="sigla"
+      [(ngModel)]="disciplina.sigla"
+      formControlName="sigla"
+    >
+
+    <app-validation-message
+      *ngIf="hasErrorOnDisciplinaForm && !disciplinaForm.get('sigla').value"
+      textContent="Campo obrigatório">
+    </app-validation-message>
+
+    <app-validation-message
+      *ngIf="disciplinaForm.get('sigla').errors?.maxlength"
+      textContent="Limite máximo de 4 caracteres">
+    </app-validation-message>
+  </div>
+
+  <div class="form-field">
+    <label>Descrição</label>
+    <input
+      type="text"
+      placeholder="Algoritmos"
+      name="descricao"
+      [(ngModel)]="disciplina.descricao"
+      formControlName="descricao"
+    >
+
+    <app-validation-message
+      *ngIf="hasErrorOnDisciplinaForm && !disciplinaForm.get('descricao').value"
+      textContent="Campo obrigatório">
+    </app-validation-message>
+  </div>
+
+  <div class="form-field">
+    <label>Carga Horária</label>
+    <input
+      type="number"
+      placeholder="Ex: 16 (horas)"
+      name="cargaHoraria"
+      [(ngModel)]="disciplina.cargaHoraria"
+      formControlName="cargaHoraria"
+    >
+
+    <app-validation-message
+      *ngIf="hasErrorOnDisciplinaForm && !disciplinaForm.get('cargaHoraria').value"
+      textContent="Campo obrigatório">
+    </app-validation-message>
+  </div>
+
+  <div class="form-field">
+    <label>Professor</label>
+    <po-select
+      name="professor"
+      formControlName="professor"
+      [p-options]="professoresOptions"
+      (p-change)="relacionarProfessorComDisciplina($event)">
+    </po-select>
+
+    <app-validation-message
+      *ngIf="hasErrorOnDisciplinaForm && !disciplinaForm.get('professor').value"
+      textContent="Campo obrigatório">
+    </app-validation-message>
+  </div>
+
+  <po-button
+    p-type="link"
+    p-label="Incluir novo professor"
+    (p-click)="novoProfessor.open()">
+  </po-button>
+
+  <po-modal #novoProfessor p-size="md" p-title="Novo Professor">
+    <form [formGroup]="professorForm" class="form-group">
+      <div class="form-field">
+        <label>Nome</label>
+        <input
+          type="text"
+          placeholder="Messias"
+          name="nome"
+          [(ngModel)]="professor.nome"
+          formControlName="nome"
+        >
+
+        <app-validation-message
+          *ngIf="hasErrorOnProfessorForm && !professorForm.get('nome').value"
+          textContent="Campo obrigatório">
+        </app-validation-message>
+
+        <app-validation-message
+          *ngIf="professorForm.get('nome').errors?.maxlength"
+          textContent="Limite máximo de 40 caracteres">
+        </app-validation-message>
+      </div>
+
+      <div class="form-field">
+        <label>E-mail</label>
+        <input
+          type="text"
+          placeholder="messias@jacó.com"
+          name="email"
+          [(ngModel)]="professor.email"
+          formControlName="email"
+        >
+
+        <app-validation-message
+          *ngIf="hasErrorOnProfessorForm && !professorForm.get('email').value"
+          textContent="Campo obrigatório">
+        </app-validation-message>
+
+        <app-validation-message
+          *ngIf="professorForm.get('email').errors?.email"
+          textContent="Email inválido">
+        </app-validation-message>
+      </div>
+
+      <div class="form-field">
+        <label>CPF</label>
+        <input
+          type="number"
+          placeholder="777.777.777-77"
+          name="cpf"
+          [(ngModel)]="professor.cpf"
+          formControlName="cpf"
+        >
+
+        <app-validation-message
+          *ngIf="hasErrorOnProfessorForm && !professorForm.get('cpf').value"
+          textContent="Campo obrigatório">
+        </app-validation-message>
+
+        <app-validation-message
+          *ngIf="professorForm.get('cpf').errors?.pattern"
+          textContent="Ex: 123.456.789-00">
+        </app-validation-message>
+      </div>
+
+      <div class="form-field">
+        <label>Titulação</label>
+        <po-select
+          [(ngModel)]="professor.titulacao"
+          [ngModelOptions]="{standalone: true}"
+          [p-options]="titulacaoProfessorOptions">
+        </po-select>
+      </div>
+
+      <po-button
+        p-label="Adicionar professor"
+        p-type="secondary"
+        (p-click)="criarProfessor()">
+      </po-button>
+    </form>
+  </po-modal>
+
+  <po-button
+    p-label="Adicionar disciplina"
+    p-type="secondary"
+    (p-click)="criarDisciplina()">
+  </po-button>
+</form>

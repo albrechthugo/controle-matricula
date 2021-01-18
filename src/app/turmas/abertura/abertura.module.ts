@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { 
-PoButtonModule, 
-PoContainerModule, 
-PoFieldModule, 
-PoHttpInterceptorModule, 
-PoModalModule, 
-PoModule, 
+import {
+PoButtonModule,
+PoContainerModule,
+PoFieldModule,
+PoHttpInterceptorModule,
+PoModalModule,
+PoModule,
 PoStepperModule } from '@po-ui/ng-components';
 import { AberturaRoutingModule } from './abertura-routing.module';
 
@@ -17,13 +17,16 @@ import { DisciplinasComponent } from './disciplinas/disciplinas.component';
 import { AlunosComponent } from './alunos/alunos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidationMessageModule } from 'src/app/shared/components/validation-message/validation-message.module';
-
+import { AlunosFormComponent } from './alunos/alunos-form/alunos-form.component';
+import { DisciplinaFormComponent } from './disciplinas/disciplina-form/disciplina-form.component';
 @NgModule({
   declarations: [
     AberturaComponent,
     InformacoesBasicasComponent,
     DisciplinasComponent,
     AlunosComponent,
+    AlunosFormComponent,
+    DisciplinaFormComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +40,7 @@ import { ValidationMessageModule } from 'src/app/shared/components/validation-me
     FormsModule,
     ReactiveFormsModule,
     ValidationMessageModule,
-    PoModule
+    PoModule,
   ]
 })
 export class AberturaModule { }

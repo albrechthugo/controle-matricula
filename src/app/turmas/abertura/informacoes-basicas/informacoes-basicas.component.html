@@ -1,22 +1,21 @@
 <div>
-  <form #form="ngForm" [formGroup]="infoForm">
+  <form [formGroup]="informacoesBasicasForm">
     <div>
       <po-input
         p-label="Descrição"
         name="descricao"
         p-placeholder="Calouros 2021/1 ADS"
-        [(ngModel)]="informacoesBasicas.descricao"
         formControlName="descricao"
         p-required="true">
       </po-input>
 
-      <app-validation-message 
-        *ngIf="hasError && !infoForm.get('descricao').value" 
+      <app-validation-message
+        *ngIf="hasError && !informacoesBasicasForm.get('descricao').value"
         textContent="Campo obrigatório">
       </app-validation-message>
 
-      <app-validation-message 
-        *ngIf="infoForm.get('descricao').errors && infoForm.get('descricao').value" 
+      <app-validation-message
+        *ngIf="informacoesBasicasForm.get('descricao').errors && informacoesBasicasForm.get('descricao').value"
         textContent="Limite máximo de 30 caracteres">
       </app-validation-message>
     </div>
@@ -26,18 +25,17 @@
         p-label="Ano Letivo"
         name="anoLetivo"
         p-placeholder="2021"
-        [(ngModel)]="informacoesBasicas.anoLetivo"
         formControlName="anoLetivo"
         [p-required]="hasError">
       </po-number>
 
-      <app-validation-message 
-        *ngIf="hasError && !infoForm.get('anoLetivo').value" 
+      <app-validation-message
+        *ngIf="hasError && !informacoesBasicasForm.get('anoLetivo').value"
         textContent="Campo obrigatório">
       </app-validation-message>
 
-      <app-validation-message 
-        *ngIf="infoForm.get('anoLetivo').errors?.pattern" 
+      <app-validation-message
+        *ngIf="informacoesBasicasForm.get('anoLetivo').errors?.pattern"
         textContent="Ex: 2020">
       </app-validation-message>
     </div>
@@ -47,20 +45,19 @@
         p-label="Período Letivo"
         name="periodoLetivo"
         p-placeholder="1 ou 2 (semestre)"
-        [(ngModel)]="informacoesBasicas.periodoLetivo"
         formControlName="periodoLetivo"
         [p-required]="hasError">
       </po-number>
 
-      <app-validation-message 
-        *ngIf="hasError && !infoForm.get('periodoLetivo').value" 
+      <app-validation-message
+        *ngIf="hasError && !informacoesBasicasForm.get('periodoLetivo').value"
         textContent="Campo obrigatório">
       </app-validation-message>
 
-      <app-validation-message 
-        *ngIf="infoForm.get('periodoLetivo').value
-          && infoForm.get('periodoLetivo').value != 1
-          && infoForm.get('periodoLetivo').value != 2" 
+      <app-validation-message
+        *ngIf="informacoesBasicasForm.get('periodoLetivo').value
+          && informacoesBasicasForm.get('periodoLetivo').value != 1
+          && informacoesBasicasForm.get('periodoLetivo').value != 2"
         textContent="1° ou 2° semestre">
       </app-validation-message>
     </div>
@@ -71,20 +68,20 @@
         name="numeroVagas"
         formControlName="numeroVagas"
         [p-required]="hasError"
-        [(ngModel)]="informacoesBasicas.numeroVagas"
         p-placeholder="Informe a quantidade de vagas">
       </po-input>
 
-      <app-validation-message 
-        *ngIf="hasError && !infoForm.get('numeroVagas').value" 
+      <app-validation-message
+        *ngIf="hasError && !informacoesBasicasForm.get('numeroVagas').value"
         textContent="Campo obrigatório">
       </app-validation-message>
     </div>
-
-    <po-button
-      p-label="Próximo"
-      p-type="primary"
-      (p-click)="saveInfo()">
-    </po-button>
   </form>
+
+  <po-button
+    p-label="Próximo"
+    p-type="primary"
+    (p-click)="saveInfo()"
+    class="btn-next">
+  </po-button>
 </div>

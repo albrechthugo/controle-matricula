@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap');
 
+:root {
+  font-size: 20px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,6 +24,16 @@ body {
   height: 100vh;
 }
 
-:root {
-  font-size: 20px;
+.btn-next, .btn-previous {
+  position: absolute;
+  bottom: 30px;
 }
+
+.btn-previous {
+  right: 140px;
+}
+
+.btn-next {
+  right: 35px;
+}
+

@@ -1,28 +1,13 @@
-.informacoes-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 30px;
-}
-
-.form-group {
-  width: 16rem;
-  margin-bottom: 20px;
-}
-
 .form-group, .form-field {
   display: flex;
   flex-direction: column;
 }
 
 .form-field {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .form-field label {
-  font-size: 0.7rem;
   color: var(--color-primary);
 }
 
@@ -36,10 +21,4 @@
 
 .form-field input:focus {
   border: 1px solid rgba(0,0,0, .4);
-}
-
-.btn-next {
-  position: absolute;
-  right: 35px;
-  bottom: 30px;
 }

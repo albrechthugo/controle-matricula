@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { PoMultiselectOption } from '@po-ui/ng-components';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 
 import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
-import { FormaDeIngresso } from '../../../entities/aluno/forma-ingresso/ingresso.enum';
-import { AlunosCriarService } from './services/alunos-criar.service';
 import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
-import { AlunosGetAllService } from './services/alunos-get-all.service';
+import { TesteService } from '../teste.service';
 
 @Component({
   selector: 'app-alunos',
@@ -18,39 +14,19 @@ import { AlunosGetAllService } from './services/alunos-get-all.service';
 })
 export class AlunosComponent implements OnInit {
 
-  hasError: boolean = false;
+  @Output()
+  firstStep: EventEmitter<any> = new EventEmitter();
 
-  formaIngressoOptions: PoSelectOption[] = [
-    { label: 'ENADE', value: FormaDeIngresso.ENADE },
-    { label: 'VESTIBULAR', value: FormaDeIngresso.VESTIBULAR }
-  ];
+  @Output()
+  previousStep: EventEmitter<any> = new EventEmitter();
 
   alunos: Aluno[] = [];
-
   alunosOptions: PoMultiselectOption[] = [];
 
-  aluno: Aluno = {
-    cpf: null,
-    email: null,
-    nome: null,
-    formaIngresso: null,
-    matricula: null,
-  }
-
-  alunoForm = new FormGroup({
-    cpf: new FormControl(),
-    email: new FormControl(),
-    nome: new FormControl(),
-    formaIngresso: new FormControl(),
-    matricula: new FormControl(),
-  })
-
   constructor(
-    private criarAlunoService: AlunosCriarService,
     private criarTurmaService: TurmaCriarService,
-    private alunosGetAllService: AlunosGetAllService,
-    private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private testeservice: TesteService
   ) {}
 
 
@@ -59,28 +35,6 @@ export class AlunosComponent implements OnInit {
     this.alunos.map(aluno => {
       this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
     });
-
-    this.alunoForm = this.fb.group({
-      cpf: [null, [Validators.required, Validators.pattern(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/)]],
-      email: [null, [Validators.required, Validators.email]],
-      nome: [null, [Validators.required]],
-      formaIngresso: [null, [Validators.required]],
-      matricula: [null, [Validators.required, Validators.pattern(/[0-9]{6}/)]],
-    });
-  }
-
-  criarAluno(): void {
-    if(this.alunoForm.valid) {
-      this.criarAlunoService.criarAluno(this.aluno)
-      .pipe(switchMap(() => this.alunosGetAllService.getAllAlunos()))
-      .subscribe(alunos => {
-        alunos.map(aluno => {
-          this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
-        })
-      });
-    } else {
-      this.hasError = true;
-    }
   }
 
   criarTurma(): void {
@@ -90,11 +44,27 @@ export class AlunosComponent implements OnInit {
       })
   }
 
-  saveInfo(): void {
-    if(this.alunoForm.valid) {
-      NovaTurma.alunos = this.alunos;
+  updateOptions(options): void {
+    this.alunosOptions = options;
+  }
+
+  saveInfoAndFinish(): void {
+    NovaTurma.alunos = this.alunos;
+
+    if(NovaTurma.alunos) {
       this.criarTurma();
     }
+
+    this.testeservice.testeee.subscribe(teste => console.log(teste))
+    // this.redirectToFirstStep();
   }
+
+  previous(): void {
+    this.previousStep.emit();
+  }
+
+  // redirectToFirstStep(): void {
+  //   this.firstStep.emit();
+  // }
 
 }
