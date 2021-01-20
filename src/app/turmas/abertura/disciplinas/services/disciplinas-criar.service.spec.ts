@@ -2,7 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { DisciplinasCriarService } from './disciplinas-criar.service';
 
-fdescribe('O serviço DisciplinasCriarService', () => {
+describe('O serviço DisciplinasCriarService', () => {
   let service: DisciplinasCriarService;
   let httpMock: HttpTestingController;
 
