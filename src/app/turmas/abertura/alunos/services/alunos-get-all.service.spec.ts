@@ -5,7 +5,7 @@ import { FormaDeIngresso } from 'src/app/entities/aluno/forma-ingresso/ingresso.
 
 import { AlunosGetAllService } from './alunos-get-all.service';
 
-fdescribe('O serviço AlunosGetAllService', () => {
+describe('O serviço AlunosGetAllService', () => {
   let service: AlunosGetAllService;
   let httpMock: HttpTestingController;
 
@@ -39,40 +39,39 @@ fdescribe('O serviço AlunosGetAllService', () => {
       },
       {
         id: 2,
-        nome: 'Sofia',
-        cpf: '126.356.289-06',
-        email: 'sofia@teste.com',
+        nome: 'Jose',
+        cpf: '123.456.789-00',
+        email: 'jose@teste.com',
         formaDeIngresso: FormaDeIngresso.ENADE,
-        matricula: 784922,
+        matricula: 123123,
         turma: null
       },
       {
         id: 3,
-        nome: 'Jose',
-        cpf: '153.456.783-10',
-        email: 'jose@teste.com',
+        nome: 'Israel',
+        cpf: '123.456.789-00',
+        email: 'aaa@teste.com',
         formaDeIngresso: FormaDeIngresso.ENADE,
-        matricula: 098765,
+        matricula: 123123,
         turma: null
       },
       {
         id: 4,
         nome: 'Marcos',
-        cpf: '111.222.777-00',
-        email: 'marcos@teste.com',
+        cpf: '123.456.789-00',
+        email: 'joaase@teste.com',
         formaDeIngresso: FormaDeIngresso.ENADE,
-        matricula: 123321,
+        matricula: 123123,
         turma: null
       }
     ];
-
 
     service.getAllAlunos()
       .subscribe(response => {
         expect(response.length).toEqual(4);
         expect(response[0].nome).toEqual('Hugo');
-        expect(response[1].nome).toEqual('Sofia');
-        expect(response[2].nome).toEqual('Jose');
+        expect(response[1].nome).toEqual('Jose');
+        expect(response[2].nome).toEqual('Israel');
         expect(response[3].nome).toEqual('Marcos');
       });
 
