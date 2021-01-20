@@ -1,16 +1,86 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+
+import { FormaDeIngresso } from 'src/app/entities/aluno/forma-ingresso/ingresso.enum';
 
 import { AlunosGetAllService } from './alunos-get-all.service';
 
-describe('AlunosGetAllService', () => {
+fdescribe('O serviço AlunosGetAllService', () => {
   let service: AlunosGetAllService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [AlunosGetAllService]
+    });
     service = TestBed.inject(AlunosGetAllService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('should be created', () => {
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('deve ser instanciado', () => {
     expect(service).toBeTruthy();
   });
+
+  it('deve recuperar todos os alunos', () => {
+    const alunosResponseMock = [
+      {
+        id: 1,
+        nome: 'Hugo',
+        cpf: '123.456.789-00',
+        email: 'hugo@teste.com',
+        formaDeIngresso: FormaDeIngresso.ENADE,
+        matricula: 123456,
+        turma: null
+      },
+      {
+        id: 2,
+        nome: 'Sofia',
+        cpf: '126.356.289-06',
+        email: 'sofia@teste.com',
+        formaDeIngresso: FormaDeIngresso.ENADE,
+        matricula: 784922,
+        turma: null
+      },
+      {
+        id: 3,
+        nome: 'Jose',
+        cpf: '153.456.783-10',
+        email: 'jose@teste.com',
+        formaDeIngresso: FormaDeIngresso.ENADE,
+        matricula: 098765,
+        turma: null
+      },
+      {
+        id: 4,
+        nome: 'Marcos',
+        cpf: '111.222.777-00',
+        email: 'marcos@teste.com',
+        formaDeIngresso: FormaDeIngresso.ENADE,
+        matricula: 123321,
+        turma: null
+      }
+    ];
+
+
+    service.getAllAlunos()
+      .subscribe(response => {
+        expect(response.length).toEqual(4);
+        expect(response[0].nome).toEqual('Hugo');
+        expect(response[1].nome).toEqual('Sofia');
+        expect(response[2].nome).toEqual('Jose');
+        expect(response[3].nome).toEqual('Marcos');
+      });
+
+    const req = httpMock.expectOne(req => {
+      return req.method === 'GET' && req.url === 'api/alunos';
+    });
+
+    req.flush(alunosResponseMock);
+  });
+
 });
