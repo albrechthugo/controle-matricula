@@ -53,9 +53,7 @@ export class InformacoesBasicasComponent implements OnInit {
   }
 
   next(): void {
-    if(this.informacoesBasicasForm.valid) {
       this.nextStep.emit();
-    }
   }
 
   resetaForm(): void {
