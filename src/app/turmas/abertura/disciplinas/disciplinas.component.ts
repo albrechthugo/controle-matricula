@@ -44,7 +44,10 @@ export class DisciplinasComponent implements OnInit {
   }
 
   next(): void {
-      this.saveInfo();
+    this.saveInfo();
+
+    if(NovaTurma.disciplinas.length) {
       this.nextStep.emit();
+    }
   }
 }
