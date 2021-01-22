@@ -56,12 +56,12 @@
 
   <div class="form-field">
     <label>Matrícula</label>
-    <po-input
+    <po-number
       type="number"
       name="matricula"
       placeholder="Ex: 45892"
       formControlName="matricula">
-    </po-input>
+    </po-number>
 
     <app-validation-message
       *ngIf="hasError && !alunoForm.get('matricula').value"

@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PoModule } from '@po-ui/ng-components';
 
 import { AberturaComponent } from './abertura.component';
 
-describe('AberturaComponent', () => {
+describe('O componente Abertura', () => {
   let component: AberturaComponent;
   let fixture: ComponentFixture<AberturaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AberturaComponent ]
+      declarations: [AberturaComponent],
+      imports: [
+        PoModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   });
@@ -19,7 +25,7 @@ describe('AberturaComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve ser instanciado', () => {
     expect(component).toBeTruthy();
   });
 });

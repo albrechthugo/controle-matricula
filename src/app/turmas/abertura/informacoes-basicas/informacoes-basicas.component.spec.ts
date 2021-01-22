@@ -52,7 +52,7 @@ describe('O componente InformacoesBasicas', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('deve salvar infos e emitir um evento para o stepper avancar o passo', () => {
+  it('deve salvar infos e emitir um evento para o stepper avancar o passo', () => {
     spyOn(component, 'next');
 
     fixture.detectChanges();

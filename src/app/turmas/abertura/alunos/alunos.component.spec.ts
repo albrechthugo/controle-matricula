@@ -1,14 +1,50 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PoModule } from '@po-ui/ng-components';
+import { of } from 'rxjs';
+import { Aluno } from 'src/app/entities/aluno/aluno.interface';
+import { FormaDeIngresso } from 'src/app/entities/aluno/forma-ingresso/ingresso.enum';
+import { Turma } from 'src/app/entities/turma/turma.interface';
+import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
+import { AlunosFormComponent } from './alunos-form/alunos-form.component';
 import { AlunosComponent } from './alunos.component';
+class TurmaCriarServiceMock {
+  abrirTurma(turma: Turma) {
+    return of({});
+  }
+}
 
-describe('AlunosComponent', () => {
+describe('O componente Alunos', () => {
   let component: AlunosComponent;
   let fixture: ComponentFixture<AlunosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AlunosComponent ]
+      declarations: [
+        AlunosComponent,
+        AlunosFormComponent,
+      ],
+      imports: [
+        RouterTestingModule,
+        PoModule,
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule
+
+      ],
+      providers: [
+        {
+          provide: TurmaCriarService,
+          useClass: TurmaCriarServiceMock
+        },
+        { provide: ActivatedRoute,
+          useValue: { snapshot: { data: { 'alunos': alunosMock } }
+        }
+      }
+      ]
     })
     .compileComponents();
   });
@@ -19,7 +55,41 @@ describe('AlunosComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve ser instanciado', () => {
     expect(component).toBeTruthy();
   });
+
+  it('deve dar log se conseguir criar uma turma e emitir um evento para ir pro primeiro passo', () => {
+    const spyLog = spyOn(console, 'log').and.callThrough();
+    const spyFirstStep = spyOn(component['firstStep'], 'emit').and.callThrough();
+
+    component.saveInfoAndFinish();
+
+    expect(spyLog).toHaveBeenCalledWith('Turma criada com sucesso!');
+    expect(spyFirstStep).toHaveBeenCalled();
+  });
+
+  it('deve atualizar a lista de alunos com os dados que recebeu do form', () => {
+    spyOn(component, 'updateOptions');
+    component.updateOptions(alunosMock);
+    expect(component.updateOptions).toHaveBeenCalledWith(alunosMock);
+    expect(component.alunosOptions).toEqual([{ label: 'Hugo', value: 1 }]);
+  });
+
+  it('deve emitir um evento para voltar para o passo anterior', () => {
+    const spyPreviousStep = spyOn(component['previousStep'], 'emit').and.callThrough();
+    component.previous();
+    expect(spyPreviousStep).toHaveBeenCalled();
+  });
 });
+
+const alunosMock: Aluno[] = [
+  {
+    id: 1,
+    nome: 'Hugo',
+    matricula: 123321,
+    formaIngresso: FormaDeIngresso.VESTIBULAR,
+    cpf: '123.456.789-00',
+    email: 'hugo@teste.com'
+  }
+]

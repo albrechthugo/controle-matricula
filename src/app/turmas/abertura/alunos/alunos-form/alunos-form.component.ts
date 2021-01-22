@@ -62,8 +62,8 @@ export class AlunosFormComponent implements OnInit {
       };
 
       this.criarAlunoService.criarAluno(aluno)
-      .pipe(switchMap(() => this.alunosGetAllService.getAllAlunos()))
-      .subscribe({
+        .pipe(switchMap(() => this.alunosGetAllService.getAllAlunos()))
+        .subscribe({
           next: alunos => {
             alunos.map(aluno => {
               this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];

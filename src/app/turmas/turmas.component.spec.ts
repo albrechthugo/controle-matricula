@@ -1,14 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TurmasComponent } from './turmas.component';
 
-describe('TurmasComponent', () => {
+describe('O componente Turmas', () => {
   let component: TurmasComponent;
   let fixture: ComponentFixture<TurmasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TurmasComponent ]
+      declarations: [TurmasComponent],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   });
@@ -19,7 +23,7 @@ describe('TurmasComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve ser instanciado', () => {
     expect(component).toBeTruthy();
   });
 });

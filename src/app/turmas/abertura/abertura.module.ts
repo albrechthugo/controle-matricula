@@ -1,24 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import {
-PoButtonModule,
-PoContainerModule,
-PoFieldModule,
-PoHttpInterceptorModule,
-PoModalModule,
-PoModule,
-PoStepperModule } from '@po-ui/ng-components';
-import { AberturaRoutingModule } from './abertura-routing.module';
-
-import { AberturaComponent } from './abertura.component';
-import { InformacoesBasicasComponent } from './informacoes-basicas/informacoes-basicas.component';
-import { DisciplinasComponent } from './disciplinas/disciplinas.component';
-import { AlunosComponent } from './alunos/alunos.component';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { PoModule } from '@po-ui/ng-components';
 import { ValidationMessageModule } from 'src/app/shared/components/validation-message/validation-message.module';
+import { AberturaRoutingModule } from './abertura-routing.module';
+import { AberturaComponent } from './abertura.component';
 import { AlunosFormComponent } from './alunos/alunos-form/alunos-form.component';
+import { AlunosComponent } from './alunos/alunos.component';
 import { DisciplinaFormComponent } from './disciplinas/disciplina-form/disciplina-form.component';
+import { DisciplinasComponent } from './disciplinas/disciplinas.component';
+import { InformacoesBasicasComponent } from './informacoes-basicas/informacoes-basicas.component';
+
 @NgModule({
   declarations: [
     AberturaComponent,
@@ -30,13 +23,8 @@ import { DisciplinaFormComponent } from './disciplinas/disciplina-form/disciplin
   ],
   imports: [
     CommonModule,
-    PoStepperModule,
-    PoContainerModule,
     RouterModule,
     AberturaRoutingModule,
-    PoButtonModule,
-    PoFieldModule,
-    PoModalModule,
     FormsModule,
     ReactiveFormsModule,
     ValidationMessageModule,

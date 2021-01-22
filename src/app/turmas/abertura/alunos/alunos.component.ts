@@ -34,6 +34,15 @@ export class AlunosComponent implements OnInit {
     });
   }
 
+  saveInfoAndFinish(): void {
+    NovaTurma.alunos = this.alunos;
+
+    if(NovaTurma.alunos.length) {
+      this.criarTurma();
+      this.redirectToFirstStep();
+    }
+  }
+
   criarTurma(): void {
     this.criarTurmaService.abrirTurma(NovaTurma)
       .subscribe(() => {
@@ -41,26 +50,16 @@ export class AlunosComponent implements OnInit {
       })
   }
 
+  redirectToFirstStep(): void {
+    this.firstStep.emit();
+  }
+
   updateOptions(options): void {
     this.alunosOptions = options;
   }
 
-  saveInfoAndFinish(): void {
-    NovaTurma.alunos = this.alunos;
-
-    if(NovaTurma.alunos.length) {
-      this.criarTurma();
-    }
-
-    this.redirectToFirstStep();
-  }
-
   previous(): void {
     this.previousStep.emit();
-  }
-
-  redirectToFirstStep(): void {
-    this.firstStep.emit();
   }
 
 }

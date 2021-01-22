@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AlunosGetAllResolver } from './alunos-get-all.resolver';
 
-describe('AlunosGetAllResolver', () => {
+xdescribe('AlunosGetAllResolver', () => {
   let resolver: AlunosGetAllResolver;
 
   beforeEach(() => {

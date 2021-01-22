@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { DisciplinasGetAllResolver } from './disciplinas-get-all.resolver';
 
-describe('DisciplinasGetAllResolver', () => {
+xdescribe('DisciplinasGetAllResolver', () => {
   let resolver: DisciplinasGetAllResolver;
 
   beforeEach(() => {

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ProfessoresGetAllResolver } from './professores-get-all.resolver';
 
-describe('ProfessoresGetAllResolver', () => {
+xdescribe('ProfessoresGetAllResolver', () => {
   let resolver: ProfessoresGetAllResolver;
 
   beforeEach(() => {
