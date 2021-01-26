@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
+import { AlunosGetAllService } from './services/alunos-get-all.service';
 @Component({
   selector: 'app-alunos',
   templateUrl: './alunos.component.html',
@@ -23,15 +24,18 @@ export class AlunosComponent implements OnInit {
 
   constructor(
     private criarTurmaService: TurmaCriarService,
-    private activatedRoute: ActivatedRoute,
+    private alunoGetAllService: AlunosGetAllService
   ) {}
 
 
   ngOnInit(): void {
-    this.alunos = this.activatedRoute.snapshot.data['alunos'];
-    this.alunos.map(aluno => {
-      this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
-    });
+    this.alunoGetAllService.getAllAlunos()
+      .subscribe(alunos => {
+        this.alunos = alunos;
+        this.alunos.map(aluno => {
+          this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
+      });
+    })
   }
 
   saveInfoAndFinish(): void {

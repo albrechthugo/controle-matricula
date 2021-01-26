@@ -70,10 +70,6 @@ describe('O componente DisciplinaForm', () => {
       ],
       providers: [
         {
-          provide: ActivatedRoute,
-          useValue: { snapshot: { data: { 'professores': professoresMock } } }
-        },
-        {
           provide: DisciplinasCriarService,
           useClass: DisciplinasCriarServiceMock
         },

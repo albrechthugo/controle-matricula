@@ -1,10 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PoMultiselectOption } from '@po-ui/ng-components';
-import { ActivatedRoute } from '@angular/router';
-
-
 import { Disciplina } from 'src/app/entities/disciplina/disciplina.interface';
 import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
+import { DisciplinaGetAllService } from './services/disciplina-get-all.service';
 
 @Component({
   selector: 'app-disciplinas',
@@ -22,14 +20,17 @@ export class DisciplinasComponent implements OnInit {
   disciplinasOptions: PoMultiselectOption[] = [];
   disciplinas: Disciplina[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private disciplinasGetAllService: DisciplinaGetAllService) {}
 
   ngOnInit(): void {
-    this.disciplinas = this.activatedRoute.snapshot.data['disciplinas'];
-    this.disciplinas.map(disciplina => {
-      this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
-    });
-  }
+    this.disciplinasGetAllService.getAllDisciplinas()
+      .subscribe(disciplinas => {
+        this.disciplinas = disciplinas;
+        this.disciplinas.map(disciplina => {
+          this.disciplinasOptions = [...this.disciplinasOptions, { label: disciplina.descricao, value: disciplina.id }];
+        });
+      })
+    }
 
   updateDisciplinasOptions(disciplinas): void {
     this.disciplinasOptions = disciplinas;

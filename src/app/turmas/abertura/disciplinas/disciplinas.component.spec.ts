@@ -1,12 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
 import { PoModule } from '@po-ui/ng-components';
+import { of } from 'rxjs';
 import { Disciplina } from 'src/app/entities/disciplina/disciplina.interface';
 import { Professor } from 'src/app/entities/professor/professor.interface';
 import { Titulacao } from 'src/app/entities/professor/titulacao/titulacao.enum';
-import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
-
 import { DisciplinasComponent } from './disciplinas.component';
+import { DisciplinaGetAllService } from './services/disciplina-get-all.service';
+
+class DisciplinaGetAllServiceMock {
+  getAllDisciplinas() {
+    return of(disciplinasMock);
+  }
+}
 
 describe('O componente Disciplinas', () => {
   let component: DisciplinasComponent;
@@ -17,8 +22,8 @@ describe('O componente Disciplinas', () => {
       declarations: [DisciplinasComponent],
       providers: [
         {
-          provide: ActivatedRoute,
-          useValue: { snapshot: { data: { 'disciplinas': disciplinasMock } } }
+          provide: DisciplinaGetAllService,
+          useClass: DisciplinaGetAllServiceMock
         }
       ],
       imports: [
