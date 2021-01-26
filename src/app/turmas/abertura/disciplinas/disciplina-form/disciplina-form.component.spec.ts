@@ -130,8 +130,8 @@ describe('O componente DisciplinaForm', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  xit('deve resetar o formulario de disciplinas se o mesmo estiver valido apos criar o aluno', () => {
-    const spy = spyOn(component['disciplinasForm'], 'reset').and.callThrough();
+  it('deve resetar o formulario de disciplinas se o mesmo estiver valido apos criar o aluno', () => {
+    const spy = spyOn(component['disciplinaForm'], 'reset').and.callThrough();
     component.criarDisciplina();
     expect(spy).toHaveBeenCalled();
   });
