@@ -4,7 +4,7 @@ node_modules
 #tests
 coverage
 #compilet output
-dist
+# dist
 /www
 #log
 debug.log

@@ -1,5 +1,5 @@
 {
   "coreQuery": {
-    "coreQuery": "https://totvs.logistica.staging.totvs.app/agendamento/query/api/v1"
+    "coreQuery": "https://localhost:3000"
   }
 }
