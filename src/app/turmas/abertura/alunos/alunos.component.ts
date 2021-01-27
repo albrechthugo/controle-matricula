@@ -34,8 +34,8 @@ export class AlunosComponent implements OnInit {
         this.alunos = alunos;
         this.alunos.map(aluno => {
           this.alunosOptions = [...this.alunosOptions, { label: aluno.nome, value: aluno.id }];
-      });
-    })
+        });
+      })
   }
 
   saveInfoAndFinish(): void {

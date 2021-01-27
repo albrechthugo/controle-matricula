@@ -1,5 +1,6 @@
 <div class="disciplinas-container">
   <po-multiselect
+    name="disciplinas"
     p-label="Selecione as disciplinas abaixo:"
     [p-options]="disciplinasOptions"
     [(ngModel)]="disciplinas">
@@ -13,6 +14,7 @@
 
   <po-button
     p-type="link"
+    id="criarNovaDisciplinaModal"
     p-label="Criar nova disciplina"
     (p-click)="novaDisciplina.open()">
   </po-button>
@@ -26,6 +28,7 @@
 
   <po-button
     p-label="Próximo"
+    id="passo2Avancar"
     p-type="primary"
     class="btn-next"
     (p-click)="next()">
