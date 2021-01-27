@@ -13,7 +13,10 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    browserName: 'chrome'
+    browserName: 'chrome',
+    chromeOptions: {
+      args: ["--window-size=1920,1080"],
+    }
   },
   directConnect: true,
   SELENIUM_PROMISE_MANAGER: false,

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "server": "json-server --watch ./src/db.json --port 3000",
-    "start": "ng serve --open --proxy-config proxy.conf.js",
+    "start": "ng serve --open --proxy-config proxy.conf.js --port 8080",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -44,6 +44,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "protractor-http-mock": "^0.10.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
