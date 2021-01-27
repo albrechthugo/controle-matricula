@@ -1,4 +1,5 @@
 import { dbjsonAlunosGetAll } from '../alunos/alunos-get-all.mock';
+import { dbjsonDisciplinasGetAll } from '../disciplinas/disciplinas-get-all.mock';
 import { IExpectation } from './IExpectations';
 import { mockMultipleResponseWithDefaultHeaders } from './mockServerClientUtil';
 
@@ -12,6 +13,10 @@ export class ContoleMatriculaDefaultDB {
     const expetations: Array<IExpectation> = new Array<IExpectation>();
 
     dbjsonAlunosGetAll.forEach(item => {
+      expetations.push(item.value);
+    });
+
+    dbjsonDisciplinasGetAll.forEach(item => {
       expetations.push(item.value);
     });
 
