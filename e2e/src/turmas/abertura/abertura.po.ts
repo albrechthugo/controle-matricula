@@ -55,7 +55,11 @@ export class AberturaPage {
   }
 
   get selectProfessor(): ElementFinder {
-    return $('po-select[formControlName="professor"]');
+    return $('#selectProfessor')
+  }
+
+  get selectProfessorValue(): ElementFinder {
+    return $$('.po-select-content .po-select-item').get(0);
   }
 
   get inputNomeProfessor(): ElementFinder {
@@ -71,24 +75,27 @@ export class AberturaPage {
   }
 
   get buttonAdicionarProfessor(): ElementFinder {
-    return $('po-button[p-label="Adicionar professor"]');
+    return $('#adicionarProfessorButton button');
+  }
+
+  get buttonFecharProfessorModal(): ElementFinder {
+    return $$('.po-button.po-text-ellipsis.po-button-primary').get(1);
   }
 
   get buttonAdicionarDisciplina(): ElementFinder {
-    return $('po-button[p-label="Adicionar disciplina"]');
+    return $('#adicionarDisciplinaButton button');
   }
 
   get buttonCriarDisciplinaModal(): ElementFinder {
-    // return $('po-button[p-label="Criar nova disciplina"]');
     return $('#criarNovaDisciplinaModal');
   }
 
   get buttonCriarProfessorModal(): ElementFinder {
-    return $('po-button[p-label="Incluir novo professor"]');
+    return $('po-button[p-label="Incluir novo professor"] .po-clickable');
   }
 
   get buttonAvancarParaAlunos(): ElementFinder {
-    return $('po-button[id="passo2Avancar"]')
+    return $('#passo2Avancar')
   }
 
   get buttonRetornarParaInfosBasicas(): ElementFinder {
@@ -98,7 +105,11 @@ export class AberturaPage {
   // Passo 3 - Alunos
 
   get selectAlunos(): ElementFinder {
-    return $('po-multiselect[p-label="Selecione os alunos abaixo:"]');
+    return $('po-multiselect[p-label="Selecione os alunos abaixo:"] .po-clickable');
+  }
+
+  get selectAlunosValue(): ElementFinder {
+    return $$('.po-multiselect-items-container .po-multiselect-item').get(1);
   }
 
   get inputNomeAluno(): ElementFinder {
@@ -114,26 +125,30 @@ export class AberturaPage {
   }
 
   get inputMatriculaAluno(): ElementFinder {
-    return $('po-number[name="matricula"]')
+    return $('#matriculaAluno input')
   }
 
   get selectFormaIngresso(): ElementFinder {
-    return $('po-select[name="formaIngresso"]')
+    return $('#formaIngresso')
+  }
+
+  get selectFormaIngressoValue(): ElementFinder {
+    return $$('.po-select-content .po-select-item').get(0);
   }
 
   get buttonAdicionarAluno(): ElementFinder {
-    return $('po-button[p-label="Adicionar"]')
+    return $('#criarAlunoButton button')
   }
 
   get buttonRetornarParaDisciplinas(): ElementFinder {
-    return $('po-button[class="btn-previous"]');
+    return $('#retornarParaPasso2');
   }
 
   get buttonConcluirAbertura(): ElementFinder {
-    return $('po-button[p-label="Concluir"]');
+    return $('#concluirAbertura');
   }
 
   get buttonCriarAlunoModal(): ElementFinder {
-    return $('po-button[p-label]="Incluir novo aluno"')
+    return $('#criarAlunoModal')
   }
 }
