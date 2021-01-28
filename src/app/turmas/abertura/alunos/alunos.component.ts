@@ -1,11 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PoMultiselectOption } from '@po-ui/ng-components';
-import { ActivatedRoute } from '@angular/router';
-
 import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 import { AlunosGetAllService } from './services/alunos-get-all.service';
+
 @Component({
   selector: 'app-alunos',
   templateUrl: './alunos.component.html',
@@ -19,12 +18,16 @@ export class AlunosComponent implements OnInit {
   @Output()
   previousStep = new EventEmitter<any>();
 
+  hasErrorOnMultiSelectAlunos = false;
+
+  numeroVagasDisponiveis: number;
+
   alunos: Aluno[] = [];
   alunosOptions: PoMultiselectOption[] = [];
 
   constructor(
     private criarTurmaService: TurmaCriarService,
-    private alunoGetAllService: AlunosGetAllService
+    private alunoGetAllService: AlunosGetAllService,
   ) {}
 
 
@@ -41,9 +44,12 @@ export class AlunosComponent implements OnInit {
   saveInfoAndFinish(): void {
     NovaTurma.alunos = this.alunos;
 
-    if(NovaTurma.alunos.length) {
+    if(NovaTurma.alunos.length && this.alunos.length <= NovaTurma.numeroVagas) {
       this.criarTurma();
-      this.redirectToFirstStep();
+      window.location.reload();
+    } else {
+      this.numeroVagasDisponiveis = NovaTurma.numeroVagas;
+      this.hasErrorOnMultiSelectAlunos = true;
     }
   }
 
@@ -54,10 +60,6 @@ export class AlunosComponent implements OnInit {
       })
   }
 
-  redirectToFirstStep(): void {
-    this.firstStep.emit();
-  }
-
   updateOptions(options): void {
     this.alunosOptions = options;
   }
@@ -65,5 +67,4 @@ export class AlunosComponent implements OnInit {
   previous(): void {
     this.previousStep.emit();
   }
-
 }

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { NovaTurma } from '../../../shared/mocks/turma-mock';
-import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
+
 
 @Component({
   selector: 'app-informacoes-basicas',
@@ -24,7 +23,7 @@ export class InformacoesBasicasComponent implements OnInit {
     numeroVagas: new FormControl()
   })
 
-  constructor(private fb: FormBuilder, private criarTurmaService: TurmaCriarService) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.informacoesBasicasForm = this.fb.group({
@@ -33,10 +32,6 @@ export class InformacoesBasicasComponent implements OnInit {
       periodoLetivo: [null, [Validators.required, Validators.maxLength(1), Validators.pattern(/[1-2]{1}/)]],
       numeroVagas: [null]
     });
-
-    this.criarTurmaService.canResetForm.subscribe(() => {
-      this.resetaForm();
-    })
   }
 
   saveInfo(): void {
@@ -55,9 +50,4 @@ export class InformacoesBasicasComponent implements OnInit {
   next(): void {
       this.nextStep.emit();
   }
-
-  resetaForm(): void {
-    this.informacoesBasicasForm.reset();
-  }
-
 }
