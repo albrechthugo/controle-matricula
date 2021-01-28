@@ -16,6 +16,9 @@ import { AlunosGetAllService } from '../services/alunos-get-all.service';
 export class AlunosFormComponent implements OnInit {
 
   @Output()
+  canCloseModal = new EventEmitter<any>();
+
+  @Output()
   listaAlunos = new EventEmitter<any>();
 
   hasError: boolean = false;
@@ -71,6 +74,7 @@ export class AlunosFormComponent implements OnInit {
 
             this.listaAlunos.emit(this.alunosOptions);
             this.alunoForm.reset();
+            this.canCloseModal.emit();
           },
           error: err => console.log(err)
         });

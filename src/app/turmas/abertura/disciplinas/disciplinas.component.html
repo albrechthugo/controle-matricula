@@ -8,6 +8,7 @@
 
   <po-modal #novaDisciplina p-title="Criar nova disciplina" p-size="sm">
     <app-disciplina-form
+      (canCloseModalDisciplina)="novaDisciplina.close()"
       (listaDisciplinasOptions)="updateDisciplinasOptions($event)">
     </app-disciplina-form>
   </po-modal>

@@ -20,6 +20,9 @@ import { DisciplinasCriarService } from '../services/disciplinas-criar.service';
 export class DisciplinaFormComponent implements OnInit {
 
   @Output()
+  canCloseModalDisciplina = new EventEmitter<any>();
+
+  @Output()
   listaDisciplinasOptions = new EventEmitter<any>();
 
   hasErrorOnProfessorForm: boolean = false;
@@ -108,6 +111,7 @@ export class DisciplinaFormComponent implements OnInit {
 
             this.listaDisciplinasOptions.emit(this.disciplinasOptions);
             this.disciplinaForm.reset();
+            this.canCloseModalDisciplina.emit();
           },
           error: err => console.log(err)
         });

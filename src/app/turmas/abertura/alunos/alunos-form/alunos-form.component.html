@@ -60,6 +60,7 @@
   <div class="form-field">
     <label>Matrícula</label>
     <po-number
+      id="matriculaAluno"
       type="number"
       name="matricula"
       placeholder="Ex: 45892"
@@ -80,6 +81,7 @@
   <div class="form-field">
     <label>Forma de Ingresso</label>
     <po-select
+      id="formaIngresso"
       name="formaIngresso"
       [p-options]="formaIngressoOptions"
       formControlName="formaIngresso">
@@ -92,6 +94,7 @@
   </div>
 
   <po-button
+    id="criarAlunoButton"
     p-type="secondary"
     p-label="Adicionar"
     (p-click)="criarAluno()">

@@ -59,6 +59,7 @@
     <label>Professor</label>
     <po-select
       name="professor"
+      id="selectProfessor"
       formControlName="professor"
       [p-options]="professoresOptions"
       (p-change)="relacionarProfessorComDisciplina($event)">
@@ -154,6 +155,7 @@
       </div>
 
       <po-button
+        id="adicionarProfessorButton"
         p-label="Adicionar professor"
         p-type="secondary"
         (p-click)="criarProfessor()">
@@ -162,6 +164,7 @@
   </po-modal>
 
   <po-button
+    id="adicionarDisciplinaButton"
     p-label="Adicionar disciplina"
     p-type="secondary"
     (p-click)="criarDisciplina()">

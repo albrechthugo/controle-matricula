@@ -9,16 +9,21 @@
     #novoAluno
     p-title="Incluir novo aluno"
     p-size="sm">
-    <app-alunos-form (listaAlunos)="updateOptions($event)"></app-alunos-form>
+    <app-alunos-form
+      (listaAlunos)="updateOptions($event)"
+      (canCloseModal)="novoAluno.close()">
+    </app-alunos-form>
   </po-modal>
 
   <po-button
+    id="criarAlunoModal"
     p-type="link"
     p-label="Incluir novo aluno"
     (p-click)="novoAluno.open()">
   </po-button>
 
   <po-button
+    id="retornarParaPasso2"
     p-label="Voltar"
     p-type="secondary"
     class="btn-previous"
@@ -26,6 +31,7 @@
   </po-button>
 
   <po-button
+    id="concluirAbertura"
     p-label="Concluir"
     p-type="primary"
     (p-click)="saveInfoAndFinish()"
