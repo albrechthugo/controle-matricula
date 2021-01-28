@@ -5,6 +5,11 @@
     [(ngModel)]="alunos">
   </po-multiselect>
 
+  <app-validation-message
+    *ngIf="hasErrorOnMultiSelectAlunos"
+    textContent="Vagas: {{numeroVagasDisponiveis}} Selecionados: {{alunos.length}}">
+  </app-validation-message>
+
   <po-modal
     #novoAluno
     p-title="Incluir novo aluno"
