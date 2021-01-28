@@ -1,0 +1,10 @@
+#dependencies
+node_modules
+.idea
+#tests
+coverage
+#compilet output
+# dist
+/www
+#log
+debug.log

@@ -1,0 +1,14 @@
+{
+  "name": "mockserver",
+  "main": "server.js",
+  "scripts": {
+    "prod": "tsc && node ./dist/server.js"
+  },
+  "dependencies": {
+    "mockserver-client": "^5.5.1",
+    "mockserver-node": "5.5.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}

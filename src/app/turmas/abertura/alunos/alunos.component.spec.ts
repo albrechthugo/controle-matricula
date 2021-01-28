@@ -11,9 +11,16 @@ import { Turma } from 'src/app/entities/turma/turma.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
 import { AlunosFormComponent } from './alunos-form/alunos-form.component';
 import { AlunosComponent } from './alunos.component';
+import { AlunosGetAllService } from './services/alunos-get-all.service';
 class TurmaCriarServiceMock {
   abrirTurma(turma: Turma) {
     return of({});
+  }
+}
+
+class AlunosGetAllServiceMock {
+  getAllAlunos() {
+    return of(alunosMock)
   }
 }
 
@@ -40,10 +47,10 @@ describe('O componente Alunos', () => {
           provide: TurmaCriarService,
           useClass: TurmaCriarServiceMock
         },
-        { provide: ActivatedRoute,
-          useValue: { snapshot: { data: { 'alunos': alunosMock } }
+        {
+          provide: AlunosGetAllService,
+          useClass: AlunosGetAllServiceMock
         }
-      }
       ]
     })
     .compileComponents();

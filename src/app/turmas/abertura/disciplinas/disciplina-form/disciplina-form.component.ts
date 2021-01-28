@@ -1,9 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
 import { switchMap } from 'rxjs/operators';
-
 import { Disciplina } from 'src/app/entities/disciplina/disciplina.interface';
 import { Professor } from 'src/app/entities/professor/professor.interface';
 import { Titulacao } from 'src/app/entities/professor/titulacao/titulacao.enum';
@@ -20,6 +18,9 @@ import { DisciplinasCriarService } from '../services/disciplinas-criar.service';
   styleUrls: ['./disciplina-form.component.css']
 })
 export class DisciplinaFormComponent implements OnInit {
+
+  @Output()
+  canCloseModalDisciplina = new EventEmitter<any>();
 
   @Output()
   listaDisciplinasOptions = new EventEmitter<any>();
@@ -71,15 +72,17 @@ export class DisciplinaFormComponent implements OnInit {
     private professoresGetAllService: ProfessoresGetAllService,
     private editarProfessorService: ProfessoresEditarService,
     private professoresGetByIdService: ProfessoresGetByIdService,
-    private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.professores = this.activatedRoute.snapshot.data['professores'];
-    this.professores.map(professor => {
-      this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
-    });
+    this.professoresGetAllService.getAllProfessores()
+      .subscribe(professores => {
+        this.professores = professores;
+        this.professores.map(professor => {
+          this.professoresOptions = [...this.professoresOptions, { label: professor.nome, value: professor.id }];
+        });
+      });
 
     this.disciplinaForm = this.fb.group({
       sigla: [null, [Validators.maxLength(4), Validators.required]],
@@ -108,6 +111,7 @@ export class DisciplinaFormComponent implements OnInit {
 
             this.listaDisciplinasOptions.emit(this.disciplinasOptions);
             this.disciplinaForm.reset();
+            this.canCloseModalDisciplina.emit();
           },
           error: err => console.log(err)
         });

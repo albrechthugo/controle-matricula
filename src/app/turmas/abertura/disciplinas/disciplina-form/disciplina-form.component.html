@@ -3,6 +3,7 @@
     <label>Sigla</label>
     <po-input
       type="text"
+      id="sigla"
       placeholder="AGT"
       name="sigla"
       [(ngModel)]="disciplina.sigla"
@@ -24,6 +25,7 @@
     <label>Descrição</label>
     <po-input
       type="text"
+      id="descricaoDisciplina"
       placeholder="Algoritmos"
       name="descricao"
       [(ngModel)]="disciplina.descricao"
@@ -40,6 +42,7 @@
     <label>Carga Horária</label>
     <po-input
       type="number"
+      id="cargaHoraria"
       placeholder="Ex: 16 (horas)"
       name="cargaHoraria"
       [(ngModel)]="disciplina.cargaHoraria"
@@ -56,6 +59,7 @@
     <label>Professor</label>
     <po-select
       name="professor"
+      id="selectProfessor"
       formControlName="professor"
       [p-options]="professoresOptions"
       (p-change)="relacionarProfessorComDisciplina($event)">
@@ -79,6 +83,7 @@
         <label>Nome</label>
         <po-input
           type="text"
+          id="nomeProfessor"
           placeholder="Messias"
           name="nome"
           [(ngModel)]="professor.nome"
@@ -100,6 +105,7 @@
         <label>E-mail</label>
         <po-input
           type="text"
+          id="emailProfessor"
           placeholder="messias@jacó.com"
           name="email"
           [(ngModel)]="professor.email"
@@ -121,6 +127,7 @@
         <label>CPF</label>
         <po-input
           type="text"
+          id="cpfProfessor"
           placeholder="777.777.777-77"
           name="cpf"
           [(ngModel)]="professor.cpf"
@@ -148,6 +155,7 @@
       </div>
 
       <po-button
+        id="adicionarProfessorButton"
         p-label="Adicionar professor"
         p-type="secondary"
         (p-click)="criarProfessor()">
@@ -156,6 +164,7 @@
   </po-modal>
 
   <po-button
+    id="adicionarDisciplinaButton"
     p-label="Adicionar disciplina"
     p-type="secondary"
     (p-click)="criarDisciplina()">

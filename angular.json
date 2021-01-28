@@ -59,13 +59,36 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "mockenv": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mockenv.ts"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "controle-matricula:build"
+            "browserTarget": "controle-matricula:build",
+            "proxyConfig": "proxy.conf.js"
           },
           "configurations": {
             "production": {
@@ -77,6 +100,11 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "controle-matricula:build"
+          },
+          "configurations": {
+            "mockenv": {
+              "browserTarget": "controle-matricula:build:mockenv"
+            }
           }
         },
         "test": {
@@ -120,8 +148,8 @@
             "devServerTarget": "controle-matricula:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "controle-matricula:serve:production"
+            "mockenv": {
+              "devServerTarget": "controle-matricula:serve:mockenv"
             }
           }
         }
