@@ -70,19 +70,4 @@ describe('O componente InformacoesBasicas', () => {
     component.saveInfo();
     expect(component.hasError).toBeTruthy();
   });
-
-  it('deve resetar o formulario caso contenha turma', () => {
-    component.informacoesBasicasForm.get('descricao').setValue('Calouros');
-    component.informacoesBasicasForm.get('anoLetivo').setValue(2021);
-    component.informacoesBasicasForm.get('periodoLetivo').setValue(2);
-    component.informacoesBasicasForm.get('numeroVagas').setValue(22);
-
-    component.resetaForm();
-
-    expect(component.informacoesBasicasForm.get('descricao').value).toBeNull();
-    expect(component.informacoesBasicasForm.get('anoLetivo').value).toBeNull();
-    expect(component.informacoesBasicasForm.get('periodoLetivo').value).toBeNull();
-    expect(component.informacoesBasicasForm.get('numeroVagas').value).toBeNull();
-  });
-
 });

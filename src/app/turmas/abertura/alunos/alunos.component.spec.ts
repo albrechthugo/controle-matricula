@@ -4,11 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoModule } from '@po-ui/ng-components';
+import { alunos } from 'mockserver/alunos/alunos-criar.mock';
 import { of } from 'rxjs';
 import { Aluno } from 'src/app/entities/aluno/aluno.interface';
 import { FormaDeIngresso } from 'src/app/entities/aluno/forma-ingresso/ingresso.enum';
 import { Turma } from 'src/app/entities/turma/turma.interface';
 import { TurmaCriarService } from 'src/app/services/turma/turma-criar.service';
+import { NovaTurma } from 'src/app/shared/mocks/turma-mock';
 import { AlunosFormComponent } from './alunos-form/alunos-form.component';
 import { AlunosComponent } from './alunos.component';
 import { AlunosGetAllService } from './services/alunos-get-all.service';
@@ -66,14 +68,20 @@ describe('O componente Alunos', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve dar log se conseguir criar uma turma e emitir um evento para ir pro primeiro passo', () => {
+  it('deve dar log se conseguir criar uma turma', () => {
     const spyLog = spyOn(console, 'log').and.callThrough();
-    const spyFirstStep = spyOn(component['firstStep'], 'emit').and.callThrough();
-
+    NovaTurma.alunos = alunosMock;
+    NovaTurma.numeroVagas = 2;
+    component.alunos.length = 2;
     component.saveInfoAndFinish();
-
     expect(spyLog).toHaveBeenCalledWith('Turma criada com sucesso!');
-    expect(spyFirstStep).toHaveBeenCalled();
+  });
+
+  it('deve setar hasErrorOnMultiSelectAlunos como true se tiver mais alunos do q o permitido', () => {
+    NovaTurma.numeroVagas = 2;
+    component.alunos.length = 3;
+    component.saveInfoAndFinish();
+    expect(component.hasErrorOnMultiSelectAlunos).toBeTruthy();
   });
 
   it('deve atualizar a lista de alunos com os dados que recebeu do form', () => {

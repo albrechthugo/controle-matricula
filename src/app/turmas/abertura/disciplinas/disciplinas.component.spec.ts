@@ -61,12 +61,6 @@ describe('O componente Disciplinas', () => {
     component.next();
     expect(spyNextStep).toHaveBeenCalled();
   });
-
-  it('deve salvar as informacoes no objeto', () => {
-    spyOn(component, 'saveInfo');
-    component.next();
-    expect(component.saveInfo).toHaveBeenCalled();
-  });
 });
 
 const professorMock: Professor = {
