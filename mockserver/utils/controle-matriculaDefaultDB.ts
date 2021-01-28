@@ -1,5 +1,7 @@
 import { dbjsonAlunosGetAll } from '../alunos/alunos-get-all.mock';
 import { dbjsonDisciplinasGetAll } from '../disciplinas/disciplinas-get-all.mock';
+import { dbjsonProfessoresGetAll } from '../professores/professores-get-all.mock';
+import { dbjsonProfessoresGetById } from '../professores/professores.getBy-id';
 import { IExpectation } from './IExpectations';
 import { mockMultipleResponseWithDefaultHeaders } from './mockServerClientUtil';
 
@@ -17,6 +19,14 @@ export class ContoleMatriculaDefaultDB {
     });
 
     dbjsonDisciplinasGetAll.forEach(item => {
+      expetations.push(item.value);
+    });
+
+    dbjsonProfessoresGetAll.forEach(item => {
+      expetations.push(item.value);
+    });
+
+    dbjsonProfessoresGetById.forEach(item => {
       expetations.push(item.value);
     });
 

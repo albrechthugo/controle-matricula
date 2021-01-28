@@ -22,16 +22,16 @@ export const dbjsonAlunosGetAll: Array<DBJSON> = [
       httpResponse: {
         statusCode: 201,
         body: JSON.stringify(
-          {
-            hasNext: true,
-            items: [
-              {
-                id: '11c95af3d-39ac-4805-9e20-96f8d8307d9f',
-                descricao: 'Carga de uvas roxas',
-                excluido: false
-              }
-            ] as any[]
-          }
+          [
+            {
+              cpf: '123.456.789-00',
+              email: 'hugo@teste.com',
+              nome: 'Hugo',
+              formaIngresso: 'Vestibular',
+              matricula: 123321,
+              id: 1
+            }
+          ]
         )
       }
     }

@@ -21,7 +21,7 @@ export const dbjsonDisciplinasGetAll: Array<DBJSON> = [
       },
       httpResponse: {
         statusCode: 201,
-        body: JSON.stringify(
+        body: JSON.stringify([
           {
             id: 1,
             sigla: 'AGT',
@@ -36,6 +36,7 @@ export const dbjsonDisciplinasGetAll: Array<DBJSON> = [
               titulacao: 'Mestre'
             }
           }
+        ]
         )
       }
     }
