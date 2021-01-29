@@ -14,17 +14,18 @@ Rode `npm run start` ou `yarn start` para um servidor de desenvolvimento. Navegu
 
 ## Development API
 
-Rode `npm run server` ou `yarn server` para iniciar uma api fake para consumo e inserção de dados. Você pode ver os endpoints disponíveis navegando até `http://localhost:3000/`.
+Rode `npm run server` ou `yarn server` para iniciar uma api fake para consumo e inserção de dados. Você pode ver os endpoints disponíveis navegando até `http://localhost:1080/`.
 
 ## Build
 
 Rode `npm run build` ou `yarn build` para buildar o projeto. O build vai ser armazenado no diretório `dist/`. Use a flag `--prod` para o build de produção.
 
-## Testes unitários
+## Testes Unitários
 
 Rode `npm run test` ou `yarn test` para executar os testes unitários via [Karma](https://karma-runner.github.io).
 
-## Testes de integração
+## Testes de Integração
+
+Navegue para a pasta /mockserver e rode `npm run prod` para inicializar o servidor mockado com os serviços http.
 
 Rode `npm run e2e` ou `yarn e2e` para executar os testes de integração via [Protractor](http://www.protractortest.org/).
-
